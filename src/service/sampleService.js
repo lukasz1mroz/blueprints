@@ -1,5 +1,5 @@
-import { logger } from "../utils/logger";
-import { SampleError } from "../utils/errors";
+import { logger } from "../utils/logger.js";
+import { SampleError } from "../utils/errors.js";
 
 const LOG_SOURCE = "sampleService";
 

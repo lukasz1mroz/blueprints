@@ -1,6 +1,6 @@
 import { Router } from "express";
-import asyncHandler from "express-asyng-handler";
-import { testRoute } from "./Controller";
+import asyncHandler from "express-async-handler";
+import { testRoute } from "./Controller.js";
 
 const router = Router();
 

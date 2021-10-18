@@ -1,5 +1,4 @@
-import { Request, Response } from "express";
-import { testAction } from "../service/sampleService";
+import { testAction } from "../service/sampleService.js";
 
 export const testRoute = async (req, res) => {
   const response = await testAction();
