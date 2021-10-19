@@ -1,5 +1,5 @@
-import { logger } from "../utils/logger.js";
-import { SampleError } from "../utils/errors.js";
+import { logger } from "../utils/logger";
+import { SampleError } from "../utils/errors";
 
 const LOG_SOURCE = "sampleService";
 
@@ -10,6 +10,9 @@ export const testAction = () => {
       status: 200,
     };
   } catch (e) {
-    throw new SampleError({ logSource: LOG_SOURCE, message: e.message });
+    throw new SampleError({
+      logSource: LOG_SOURCE,
+      message: e.message,
+    });
   }
 };
