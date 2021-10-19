@@ -1,3 +1,2 @@
-Move to typescript
 Setup webpack, babel
 Setup prettier, eslint
