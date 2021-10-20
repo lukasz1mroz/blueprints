@@ -1,6 +1,7 @@
-import { logger } from "./logger.js";
+import { logger } from "./logger";
+import { Request, Response } from "express";
 
-export const returnError = (err, req, res, next) => {
+export const returnError = (err: any, req: Request, res: Response, next: any) => {
   const errorObject = {
     description: err.description,
     logSource: err.logSource,
