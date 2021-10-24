@@ -1,3 +1,4 @@
-Setup webpack, babel
-Setup prettier, eslint
-Other tools: AWS, Terraform, Sentry, Grafana
+Setup code formatting: prettier, eslint
+Setup frontent: React
+Setup logging: Sentry, Grafana
+Setup clout: Terraform, AWS
