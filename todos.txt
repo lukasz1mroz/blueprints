@@ -1,4 +1,6 @@
 Setup code formatting: prettier, eslint
 Setup frontent: React
 Setup logging: Sentry, Grafana
-Setup clout: Terraform, AWS
+Setup cloud: Terraform, AWS
+Setup SDLC: oas3, md, script
+Setup devops: Docker, Jenkins
