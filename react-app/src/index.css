@@ -4,5 +4,6 @@ body {
 }
 
 .mainDiv {
-  background-color: darkred;
+  background-color: lightgreen;
+  text-align: center;
 }

@@ -13,7 +13,7 @@ class Main extends React.Component {
   getSampleData() {
     apiHandler.sampleCall().then((response) => {
       this.setState({
-        response: response.data,
+        response: response.data.data,
       });
     });
   }
