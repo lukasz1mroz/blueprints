@@ -1,6 +1,4 @@
-Setup frontent: React
-    Check setup in browser html/css/js
-    Setup index.js and index.css in src
+Setup React: backend connection
 Setup logging: Sentry, Grafana
 Setup cloud: Terraform, AWS
 Setup SDLC: oas3, md, script
