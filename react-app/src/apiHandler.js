@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const apiHandler = {
+const api = {
   sampleCall: () => axios.get('http://localhost:3000/test'),
 };
 
-export default apiHandler;
+export default api;

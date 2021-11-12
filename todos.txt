@@ -1,4 +1,4 @@
-Setup React: backend connection
+Setup React: add hooks, Typescript
 Setup logging: Sentry, Grafana
 Setup cloud: Terraform, AWS
 Setup SDLC: oas3, md, script
