@@ -6,5 +6,5 @@ export const testRoute = async (req: Request, res: Response): Promise<any> => {
   return res
     .setHeader('Access-Control-Allow-Origin', '*')
     .status(response.status)
-    .json({ data: 'Response received', status: response.status });
+    .json({ data: 'response received', status: response.status });
 };
