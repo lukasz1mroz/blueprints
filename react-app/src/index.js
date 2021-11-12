@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import apiHandler from './apiHandler';
-import './index.css';
+import { HashRouter, Route, Routes } from 'react-router-dom';
+import MainContent from './MainContent';
+import api from './ApiHandler';
+import './Styles.css';
 
 class Main extends React.Component {
   constructor(props) {
@@ -11,7 +13,7 @@ class Main extends React.Component {
   }
 
   getSampleData() {
-    apiHandler.sampleCall().then((response) => {
+    api.sampleCall().then((response) => {
       this.setState({
         response: response.data.data,
       });
@@ -23,7 +25,13 @@ class Main extends React.Component {
   }
 
   render() {
-    return <div className="mainDiv">{this.state.response}</div>;
+    return (
+      <HashRouter>
+        <Routes>
+          <Route exact path="/" element={<MainContent data={this.state.data} />} />
+        </Routes>
+      </HashRouter>
+    );
   }
 }
 
