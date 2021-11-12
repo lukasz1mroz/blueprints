@@ -28,7 +28,7 @@ class Main extends React.Component {
     return (
       <HashRouter>
         <Routes>
-          <Route exact path="/" element={<MainContent data={this.state.data} />} />
+          <Route exact path="/" element={<MainContent data={this.state.response} />} />
         </Routes>
       </HashRouter>
     );
