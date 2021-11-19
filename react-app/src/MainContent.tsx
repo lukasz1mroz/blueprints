@@ -6,10 +6,14 @@ const MainContent = () => {
 
   useEffect(() => {
     const abortController = new AbortController();
+    const signal = abortController.signal;
 
-    api.sampleCall({ signal: abortController.signal }).then((response) => {
-      setData(response.data.data);
-    });
+    api
+      .sampleCall({ signal: signal })
+      .then((response) => {
+        setData(response.data.data);
+      })
+      .catch((e) => console.log(e));
 
     return () => {
       abortController.abort();
