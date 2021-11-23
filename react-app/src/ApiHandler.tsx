@@ -1,7 +1,12 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ApiCall } from './ApiCall';
 
-const api = {
-  sampleCall: (config: AxiosRequestConfig) => axios.get('http://localhost:3000/test', config),
-};
+const queryClient = new QueryClient();
 
-export default api;
+export default function ApiHandler() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ApiCall />
+    </QueryClientProvider>
+  );
+}

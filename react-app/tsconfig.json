@@ -1,13 +1,25 @@
 {
   "compilerOptions": {
-    "lib": ["es2020", "dom"],
-    "module": "commonjs",
-    "jsx": "react",
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+    "module": "esnext",
+    "jsx": "react-jsx",
     "target": "es6",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
-  "include": ["src/*"]
+  "include": [
+    "src/*"
+  ]
 }
