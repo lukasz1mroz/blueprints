@@ -1,9 +1,15 @@
-import { useQuery } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
+import api from './ApiCallImpl';
 
 export const ApiCall = () => {
-  const { isLoading, error, data } = useQuery('repoData', () =>
-    fetch('http://localhost:3000/test').then((res) => res.json())
-  );
+  const queryClient = useQueryClient();
 
-  return <h1 className="mainContent">{isLoading ? 'Loading...' : error ? 'Error occurred: ' + error : data.data}</h1>;
+  const query = useQuery('test', api.getCall);
+  const mutation = useMutation(api.postCall(), { onSuccess: () => queryClient.invalidateQueries('test') });
+
+  return (
+    <h1 className="mainContent">
+      {query.isLoading ? 'Loading...' : query.error ? 'Error occurred: ' + query.error : query.data?.data.data}
+    </h1>
+  );
 };
