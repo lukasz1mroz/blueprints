@@ -1,9 +1,13 @@
-import winston from "winston";
+import { createLogger, format, transports } from 'winston';
 
-const expressWinstonConfig = {
-  format: winston.format.json(),
-  transports: [new winston.transports.Console()],
+const transportsList = [new transports.Console()];
+
+export const expressWinstonConfig = (level?: string) => ({
+  msg: 'HTTP {{req.method}} {{req.url}}',
+  format: format.combine(format.timestamp(), format.json()),
+  level: level ? level : process?.env?.LOG_LEVEL,
   colorize: true,
-};
+  transports: transportsList,
+});
 
-export const logger = winston.createLogger(expressWinstonConfig);
+export const logger = createLogger(expressWinstonConfig());

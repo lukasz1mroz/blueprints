@@ -1,5 +1,5 @@
 import { logger } from '../utils/logger';
-import { SampleError } from '../utils/errors';
+import { InternalServerError } from '../utils/errors';
 import { SampleResponse } from '../types/response';
 import * as Sentry from '@sentry/node';
 
@@ -19,10 +19,7 @@ export const testAction = (action: string): SampleResponse => {
     if (e instanceof Error) {
       Sentry.captureException(e);
 
-      throw new SampleError({
-        logSource: LOG_SOURCE,
-        message: e.message,
-      });
+      throw new InternalServerError(LOG_SOURCE, e.message);
     } else {
       throw new Error(String(e));
     }
