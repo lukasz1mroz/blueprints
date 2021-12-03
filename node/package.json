@@ -3,21 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpackBuild": "webpack --mode=development --config webpack.config.js",
-    "webpackStart": "webpack-dev-server --mode=development --config webpack.config.js --watch-poll",
-    "babelBuild": "babel src/ --extensions .ts,.js -d dist",
-    "babelStart": "npm run babelBuild && nodemon dist/index.js"
+    "build": "babel src/ --extensions .ts,.js -d dist",
+    "start": "npm run build && nodemon dist/app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@sentry/node": "^6.15.0",
     "@sentry/tracing": "^6.15.0",
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "express-async-handler": "^1.2.0",
+    "express-winston": "^4.2.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {

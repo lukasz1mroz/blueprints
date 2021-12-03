@@ -1,4 +1,8 @@
 Setup logging: Sentry, Grafana
+    Setup Sentry: account, config, methods check, transport
+    Add integrations: Grafana, Influx, S3 - accounts, setup
+Environment setup
+    AWS Param Store - Config
 Setup cloud: Terraform, AWS
 Setup SDLC: oas3, md, script
 Setup devops: Docker, Jenkins

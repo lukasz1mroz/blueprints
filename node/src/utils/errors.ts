@@ -1,12 +1,39 @@
-import { SampleErrorProps } from "../types/errors";
+import { ErrorProps, HttpStatusCode } from '../types/errors';
 
-export class SampleError extends Error {
+export class BaseError extends Error {
+  name: string;
+  httpCode: HttpStatusCode;
   logSource: string;
-  message: string;
+  description: string;
 
-  constructor({ logSource, message }: SampleErrorProps) {
-    super();
+  constructor({ name, httpCode, logSource, description }: ErrorProps) {
+    super(description);
+    this.name = name;
+    this.httpCode = httpCode;
     this.logSource = logSource;
-    this.message = message;
+    this.description = description;
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
+
+export class BadRequestError extends BaseError {
+  constructor(logSource: string, description: string) {
+    super({
+      name: 'BAD REQUEST',
+      httpCode: HttpStatusCode.BAD_REQUEST,
+      logSource,
+      description,
+    });
+  }
+}
+
+export class InternalServerError extends BaseError {
+  constructor(logSource: string, description: string) {
+    super({
+      name: 'INTERNAL SERVER ERROR',
+      httpCode: HttpStatusCode.INTERNAL_SERVER,
+      logSource,
+      description,
+    });
   }
 }
