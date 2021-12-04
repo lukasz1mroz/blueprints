@@ -1,6 +1,7 @@
 import { createLogger, format, transports } from 'winston';
+import { SentryTransport } from './sentryTransport';
 
-const transportsList = [new transports.Console()];
+const transportsList = [new transports.Console(), new SentryTransport()];
 
 export const expressWinstonConfig = (level?: string) => ({
   msg: 'HTTP {{req.method}} {{req.url}}',
