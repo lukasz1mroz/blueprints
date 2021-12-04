@@ -4,10 +4,6 @@ import { SampleResponse } from '../types/response';
 import * as Sentry from '@sentry/node';
 
 const LOG_SOURCE = 'sampleService';
-const transaction = Sentry.startTransaction({
-  op: 'test',
-  name: 'My First Test Transaction',
-});
 
 export const testAction = (action: string): SampleResponse => {
   try {
@@ -17,13 +13,9 @@ export const testAction = (action: string): SampleResponse => {
     };
   } catch (e) {
     if (e instanceof Error) {
-      Sentry.captureException(e);
-
       throw new InternalServerError(LOG_SOURCE, e.message);
     } else {
       throw new Error(String(e));
     }
-  } finally {
-    transaction.finish();
   }
 };
