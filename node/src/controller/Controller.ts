@@ -1,16 +1,45 @@
-import { testAction } from '../service/sampleService';
+import { authAction, getPostAction } from '../service/service';
 import { Response, Request, NextFunction } from 'express';
 import { BadRequestError, InternalServerError } from '../utils/errors';
-import { SchemaError, Validator } from 'jsonschema';
+import { Validator } from 'jsonschema';
 
 const LOG_SOURCE = 'controller';
+const validateData = (data: any, schema: any) => {
+  const validateJsonData = new Validator();
+  if (validateJsonData.validate(data, schema).errors.length > 0) {
+    throw new BadRequestError(LOG_SOURCE, 'JSON data missing');
+  }
+};
 
-export const testRoute =
+const prepareResponse = (response: any, res: Response, action?: string) => {
+  return res
+    .setHeader('Access-Control-Allow-Origin', '*')
+    .status(response.status)
+    .json({ data: `Response from ${action} action`, status: response.status, description: response.description });
+};
+
+export const authRoute = async (req: Request, res: Response): Promise<any> => {
+  const authSchema = {
+    id: 'authSchema',
+    type: 'object',
+    properties: {
+      name: { type: 'string' },
+      password: { type: 'string' },
+    },
+    required: ['name', 'password'],
+  };
+  validateData(req.body, authSchema);
+  console.log(req.body);
+  const response = await authAction(req.body.name, req.body.password);
+  prepareResponse(response, res, 'auth');
+};
+
+export const getPostActionRoute =
   (action: string) =>
   async (req: Request, res: Response): Promise<any> => {
     if (action === 'POST') {
       const postSchema = {
-        id: 'sampleSchema',
+        id: 'postSchema',
         type: 'object',
         properties: {
           id: { type: 'number' },
@@ -19,20 +48,13 @@ export const testRoute =
         },
         required: ['id', 'value'],
       };
-      const postData = req.body;
-      const validateJsonData = new Validator();
-      if (validateJsonData.validate(postData, postSchema).errors.length > 0) {
-        throw new BadRequestError(LOG_SOURCE, 'JSON data missing');
-      }
+      validateData(req.body, postSchema);
     }
 
-    const response = await testAction(action);
-    return res
-      .setHeader('Access-Control-Allow-Origin', '*')
-      .status(response.status)
-      .json({ data: `Response from ${action} action`, status: response.status });
+    const response = await getPostAction(action);
+    prepareResponse(response, res, action);
   };
 
-export const testErrorRoute = (req: Request, res: Response, next: NextFunction): Error => {
+export const errorRoute = (req: Request, res: Response, next: NextFunction): Error => {
   throw new InternalServerError(LOG_SOURCE, 'Error from testErrorRoute in Controller');
 };

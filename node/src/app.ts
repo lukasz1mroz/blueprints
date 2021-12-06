@@ -2,9 +2,8 @@ import express from 'express';
 import expressWinston from 'express-winston';
 import bodyParser from 'body-parser';
 import * as Sentry from '@sentry/node';
-import * as Tracing from '@sentry/tracing';
 
-import defaultConfig from './config/config';
+import defaultConfig from '../config/config';
 import Router from './controller/Router';
 import { expressErrorHandler } from './utils/errorHandler';
 import { logger, expressWinstonConfig } from './utils/logger';

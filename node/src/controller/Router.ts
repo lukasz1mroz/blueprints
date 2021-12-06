@@ -1,11 +1,12 @@
 import asyncHandler from 'express-async-handler';
 import { Router } from 'express';
-import { testErrorRoute, testRoute } from './Controller';
+import { authRoute, errorRoute, getPostActionRoute } from './Controller';
 
 const router = Router();
 
-router.get('/testGet', asyncHandler(testRoute('GET')));
-router.post('/testPost', asyncHandler(testRoute('POST')));
-router.get('/testError', testErrorRoute);
+router.get('/users', asyncHandler(authRoute));
+router.get('/getAction', asyncHandler(getPostActionRoute('GET')));
+router.post('/postAction', asyncHandler(getPostActionRoute('POST')));
+router.get('/error', errorRoute);
 
 export default router;
