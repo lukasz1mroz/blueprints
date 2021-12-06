@@ -1,7 +1,6 @@
 import { logger } from '../utils/logger';
 import { InternalServerError } from '../utils/errors';
 import { SampleResponse } from '../types/response';
-import * as Sentry from '@sentry/node';
 
 const LOG_SOURCE = 'sampleService';
 

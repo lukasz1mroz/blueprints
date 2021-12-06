@@ -1,12 +1,31 @@
 import { testAction } from '../service/sampleService';
 import { Response, Request, NextFunction } from 'express';
-import { InternalServerError } from '../utils/errors';
+import { BadRequestError, InternalServerError } from '../utils/errors';
+import { SchemaError, Validator } from 'jsonschema';
 
 const LOG_SOURCE = 'controller';
 
 export const testRoute =
   (action: string) =>
   async (req: Request, res: Response): Promise<any> => {
+    if (action === 'POST') {
+      const postSchema = {
+        id: 'sampleSchema',
+        type: 'object',
+        properties: {
+          id: { type: 'number' },
+          value: { type: 'number' },
+          comment: { type: 'string' },
+        },
+        required: ['id', 'value'],
+      };
+      const postData = req.body;
+      const validateJsonData = new Validator();
+      if (validateJsonData.validate(postData, postSchema).errors.length > 0) {
+        throw new BadRequestError(LOG_SOURCE, 'JSON data missing');
+      }
+    }
+
     const response = await testAction(action);
     return res
       .setHeader('Access-Control-Allow-Origin', '*')
