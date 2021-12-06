@@ -1,5 +1,9 @@
-type SampleResponse = {
+type StatusResponse = {
   status: number;
 };
 
-export { SampleResponse };
+type AuthResponse = StatusResponse & {
+  description: string;
+};
+
+export { StatusResponse, AuthResponse };

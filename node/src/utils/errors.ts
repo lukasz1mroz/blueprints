@@ -37,3 +37,14 @@ export class InternalServerError extends BaseError {
     });
   }
 }
+
+export class UnauthorizedError extends BaseError {
+  constructor(logSource: string, description: string) {
+    super({
+      name: 'UNAUTHORIZED ERROR',
+      httpCode: HttpStatusCode.UNAUTHORIZED,
+      logSource,
+      description,
+    });
+  }
+}
