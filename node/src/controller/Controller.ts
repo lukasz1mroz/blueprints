@@ -29,7 +29,6 @@ export const authRoute = async (req: Request, res: Response): Promise<any> => {
     required: ['name', 'password'],
   };
   validateData(req.body, authSchema);
-  console.log(req.body);
   const response = await authAction(req.body.name, req.body.password);
   prepareResponse(response, res, 'auth');
 };
