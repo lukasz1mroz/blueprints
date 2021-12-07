@@ -1,4 +1,5 @@
-import { authAction, getPostAction } from '../service/service';
+import { getPostAction } from '../service/actionService';
+import { authAction } from '../service/authService';
 import { Response, Request, NextFunction } from 'express';
 import { BadRequestError, InternalServerError } from '../utils/errors';
 import { Validator } from 'jsonschema';

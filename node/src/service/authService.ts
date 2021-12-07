@@ -1,11 +1,10 @@
 import bcrypt from 'bcrypt';
 
-import { logger } from '../utils/logger';
-import { InternalServerError, UnauthorizedError } from '../utils/errors';
-import { AuthResponse, StatusResponse } from '../types/response';
+import { InternalServerError } from '../utils/errors';
+import { AuthResponse } from '../types/response';
 import { User } from '../types/users';
 
-const LOG_SOURCE = 'sampleService';
+const LOG_SOURCE = 'authService';
 const users: Array<User> = [];
 
 export const authAction = async (name: string, password: string): Promise<AuthResponse> => {
@@ -29,17 +28,6 @@ export const authAction = async (name: string, password: string): Promise<AuthRe
     return {
       status: 200,
       description: 'User authenticated',
-    };
-  } catch (e) {
-    throw new InternalServerError(LOG_SOURCE, 'Internal Server Error');
-  }
-};
-
-export const getPostAction = (action: string): StatusResponse => {
-  try {
-    logger.info('getPostAtion finished', { source: LOG_SOURCE, method: action });
-    return {
-      status: 200,
     };
   } catch (e) {
     throw new InternalServerError(LOG_SOURCE, 'Internal Server Error');
