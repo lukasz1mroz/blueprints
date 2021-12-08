@@ -1,9 +1,12 @@
-type StatusResponse = {
+type GetPostActionResponse = {
+  data: string;
   status: number;
 };
 
-type AuthResponse = StatusResponse & {
+type AuthResponse = {
+  accessToken?: string;
   description: string;
+  status: number;
 };
 
-export { StatusResponse, AuthResponse };
+export { GetPostActionResponse, AuthResponse };

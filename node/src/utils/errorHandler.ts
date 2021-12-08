@@ -5,6 +5,7 @@ export const expressErrorHandler = (err: any, req: Request, res: Response, next:
     name: err.name,
     code: err.httpCode,
     logSource: err.logSource,
+    description: err.description,
   };
 
   res.status(errorObject.code || 500).json(errorObject);
