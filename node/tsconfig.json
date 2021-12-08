@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "lib": ["es2020"],
+    "baseUrl": "./",
     "module": "commonjs",
     "target": "es6",
     "strict": true,
@@ -8,5 +9,5 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/*", "config"]
+  "include": ["src/*", "src/config"]
 }
