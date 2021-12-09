@@ -1,6 +1,6 @@
 import { Validator } from 'jsonschema';
 
-import { BadRequestError } from './errors';
+import { BadRequestError } from '../types/errors';
 
 const LOG_SOURCE = 'tokenValidator';
 

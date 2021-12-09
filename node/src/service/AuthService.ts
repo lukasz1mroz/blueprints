@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-import { ForbiddenError, InternalServerError } from '../utils/errors';
+import { ForbiddenError, InternalServerError } from '../types/errors';
 import { AuthResponse } from '../types/response';
 import { User } from '../types/users';
 import config from '../config/config';
@@ -48,7 +48,7 @@ export const loginAction = async (name: string, password: string): Promise<AuthR
   }
 };
 
-export const tokenRefreshAction = async (user: User): Promise<AuthResponse> => {
+export const refreshAccessTokenAction = async (user: User): Promise<AuthResponse> => {
   try {
     const accessToken = jwt.sign({ name: user }, refreshTokenSecret, { expiresIn: '10s' });
     return {

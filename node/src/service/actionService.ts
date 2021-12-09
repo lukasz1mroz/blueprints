@@ -1,5 +1,5 @@
 import { logger } from '../utils/logger';
-import { InternalServerError } from '../utils/errors';
+import { InternalServerError } from '../types/errors';
 import { GetPostActionResponse } from '../types/response';
 
 const LOG_SOURCE = 'ActionService';
