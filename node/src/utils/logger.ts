@@ -1,6 +1,7 @@
 import { createLogger, format, transports } from 'winston';
 import { SentryTransport } from './sentryTransport';
 
+// TODO: Add Transports to Influx/Grafana and S3
 const transportsList = [new transports.Console(), new SentryTransport()];
 
 export const expressWinstonConfig = (level?: string) => ({

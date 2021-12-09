@@ -1,14 +1,24 @@
-import { getPostAction } from '../service/ActionService';
-import { loginAction } from '../service/LoginService';
 import { Response, Request, NextFunction } from 'express';
+
+import { User } from '../types/users';
+import { getPostAction } from '../service/ActionService';
+import { loginAction, tokenRefreshAction } from '../service/AuthService';
 import { InternalServerError } from '../utils/errors';
 import { validateJSONData } from '../utils/validators';
 import { RequestWithUser } from 'src/types/request';
+import { HEADER_AUTHORIZATION } from 'src/utils/constants';
 
 const LOG_SOURCE = 'controller';
 
-export const loginRoute = async (req: Request, res: Response): Promise<any> => {
-  const response = await loginAction(req.body.name, req.body.password);
+export const loginRoute = async (req: RequestWithUser, res: Response): Promise<any> => {
+  const user = req.user as User;
+  const response = await loginAction(user.name, user.password);
+  return res.setHeader('Access-Control-Allow-Origin', '*').status(response.status).json(response);
+};
+
+export const tokenRoute = async (req: RequestWithUser, res: Response): Promise<any> => {
+  const user = req.user as User;
+  const response = await tokenRefreshAction(user);
   return res.setHeader('Access-Control-Allow-Origin', '*').status(response.status).json(response);
 };
 

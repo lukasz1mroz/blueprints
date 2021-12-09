@@ -1,11 +1,5 @@
-Finish logging
-    Grafana: account, Influx connection
-    S3 logs connection
-Node server: 
-    Authentication
-    Caching
-Environment setup
-    AWS Param Store - Config
-Setup cloud: Terraform, AWS EC2
+Node server: add caching
+React: sending requests with token, update FE
+AWS setup: Redis, Param Store, EC2 host, terraform
 Setup SDLC: oas3, md, script
 Setup devops: Docker, Jenkins

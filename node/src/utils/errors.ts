@@ -48,3 +48,14 @@ export class UnauthorizedError extends BaseError {
     });
   }
 }
+
+export class ForbiddenError extends BaseError {
+  constructor(logSource: string, description: string) {
+    super({
+      name: 'FORBIDDEN ERROR',
+      httpCode: HttpStatusCode.FORBIDDEN,
+      logSource,
+      description,
+    });
+  }
+}

@@ -5,6 +5,7 @@ type GetPostActionResponse = {
 
 type AuthResponse = {
   accessToken?: string;
+  refreshToken?: string;
   description: string;
   status: number;
 };
