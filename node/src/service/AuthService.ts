@@ -6,7 +6,7 @@ import { AuthResponse } from '../types/response';
 import { User } from '../types/users';
 import config from '../config/config';
 
-const LOG_SOURCE = 'authService';
+const LOG_SOURCE = 'AuthService';
 const users: Array<User> = [];
 const accessTokenSecret = config.auth.accessTokenSecret as string;
 const refreshTokenSecret = config.auth.refreshTokenSecret as string;
@@ -53,8 +53,20 @@ export const tokenRefreshAction = async (user: User): Promise<AuthResponse> => {
     const accessToken = jwt.sign({ name: user }, refreshTokenSecret, { expiresIn: '10s' });
     return {
       status: 200,
-      description: 'Access token created',
+      description: 'Access token refreshed',
       accessToken: accessToken,
+    };
+  } catch (e) {
+    throw new InternalServerError(LOG_SOURCE, 'e.message');
+  }
+};
+
+export const revokeRefreshTokenAction = async (refreshToken: string): Promise<AuthResponse> => {
+  try {
+    refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+    return {
+      status: 204,
+      description: 'Refresh token revoked',
     };
   } catch (e) {
     throw new InternalServerError(LOG_SOURCE, 'e.message');
