@@ -2,11 +2,11 @@ import { Response, Request, NextFunction } from 'express';
 
 import { User } from '../types/users';
 import { getAction, postAction } from '../service/ActionService';
-import { loginAction, tokenRefreshAction, revokeRefreshTokenAction } from '../service/AuthService';
-import { InternalServerError } from '../utils/errors';
+import { loginAction, refreshAccessTokenAction, revokeRefreshTokenAction } from '../service/AuthService';
+import { InternalServerError } from '../types/errors';
 import { validateJSONData } from '../utils/validators';
-import { RequestWithUser } from 'src/types/request';
-import { HEADER_AUTHORIZATION } from 'src/utils/constants';
+import { RequestWithUser } from '../types/request';
+import { HEADER_AUTHORIZATION } from '../utils/constants';
 
 const LOG_SOURCE = 'Controller';
 
@@ -23,7 +23,7 @@ export const tokenRoute = async (req: RequestWithUser, res: Response): Promise<a
     return res.setHeader('Access-Control-Allow-Origin', '*').status(response.status).json(response);
   }
   const user = req.user as User;
-  const response = await tokenRefreshAction(user);
+  const response = await refreshAccessTokenAction(user);
   return res.setHeader('Access-Control-Allow-Origin', '*').status(response.status).json(response);
 };
 
