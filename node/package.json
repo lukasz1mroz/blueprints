@@ -23,6 +23,9 @@
     "express-winston": "^4.2.0",
     "jsonschema": "^1.4.0",
     "jsonwebtoken": "^8.5.1",
+    "redis": "^4.0.0",
+    "redis-cli": "^2.1.1",
+    "redis-server": "^1.2.2",
     "winston": "^3.3.3"
   },
   "devDependencies": {
