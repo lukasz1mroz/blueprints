@@ -25,7 +25,7 @@ export default (req: RequestWithUser, res: Response, next: NextFunction) => {
     return next();
   }
 
-  jwt.verify(authString, req.url === '/refreshToken' ? refreshTokenSecret : accessTokenSecret, (err, user) => {
+  jwt.verify(authString, req.url === '/token' ? refreshTokenSecret : accessTokenSecret, (err, user) => {
     if (err) throw new ForbiddenError(LOG_SOURCE, 'Invalid bearer token');
 
     logger.info('Bearer token validation successful', { source: LOG_SOURCE });
