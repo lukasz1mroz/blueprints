@@ -14,6 +14,9 @@ const config = {
     debug: false,
     release: `blueprints@${process.env.npm_package_version}`,
   },
+  cache: {
+    defaultTtl: 10,
+  },
 };
 
 export default config;

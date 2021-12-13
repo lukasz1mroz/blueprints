@@ -1,14 +1,22 @@
 import { logger } from '../utils/logger';
 import { InternalServerError } from '../types/errors';
 import { GetPostActionResponse } from '../types/response';
+import axios from 'axios';
 
 const LOG_SOURCE = 'ActionService';
 
-export const getAction = (): GetPostActionResponse => {
+export const getAction = async (postId: string): Promise<GetPostActionResponse> => {
   try {
+    const postUrl = postId
+      ? `https://jsonplaceholder.typicode.com/posts/${postId}`
+      : 'https://jsonplaceholder.typicode.com/posts';
+
+    const response = await axios.get(postUrl);
+
     logger.info('Get action finished', { source: LOG_SOURCE });
+
     return {
-      data: 'This is successful response',
+      data: response.data,
       status: 200,
     };
   } catch (e) {
