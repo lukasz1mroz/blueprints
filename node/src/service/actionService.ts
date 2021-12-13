@@ -20,7 +20,7 @@ export const getAction = async (postId: string): Promise<GetPostActionResponse> 
       status: 200,
     };
   } catch (e) {
-    throw new InternalServerError(LOG_SOURCE, 'Internal Server Error');
+    throw new InternalServerError({ logSource: LOG_SOURCE, description: 'Internal Server Error', details: { e } });
   }
 };
 
@@ -32,6 +32,6 @@ export const postAction = (): GetPostActionResponse => {
       status: 200,
     };
   } catch (e) {
-    throw new InternalServerError(LOG_SOURCE, 'Internal Server Error');
+    throw new InternalServerError({ logSource: LOG_SOURCE, description: 'Internal Server Error', details: { e } });
   }
 };

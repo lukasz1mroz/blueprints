@@ -50,5 +50,5 @@ export const postActionRoute = async (req: RequestWithUser, res: Response): Prom
 };
 
 export const errorRoute = (req: Request, res: Response, next: NextFunction): Error => {
-  throw new InternalServerError(LOG_SOURCE, 'Error from testErrorRoute in Controller');
+  throw new InternalServerError({ logSource: LOG_SOURCE, description: 'Error from testErrorRoute in Controller' });
 };

@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-import { ForbiddenError, InternalServerError } from '../types/errors';
+import { InternalServerError } from '../types/errors';
 import { AuthResponse } from '../types/response';
 import { User } from '../types/users';
 import config from '../config/config';
@@ -47,7 +47,7 @@ export const loginAction = async (name: string, password: string): Promise<AuthR
       // refreshToken: refreshToken,
     };
   } catch (e) {
-    throw new InternalServerError(LOG_SOURCE, 'Internal Server Error');
+    throw new InternalServerError({ logSource: LOG_SOURCE, description: 'Internal Server Error', details: { e } });
   }
 };
 
@@ -60,7 +60,11 @@ export const refreshAccessTokenAction = async (user: User): Promise<AuthResponse
       accessToken: accessToken,
     };
   } catch (e) {
-    throw new InternalServerError(LOG_SOURCE, 'e.message');
+    throw new InternalServerError({
+      logSource: LOG_SOURCE,
+      description: 'refreshAccessTokenAction error',
+      details: { e },
+    });
   }
 };
 
@@ -72,6 +76,10 @@ export const revokeRefreshTokenAction = async (refreshToken: string): Promise<Au
       description: 'Refresh token revoked',
     };
   } catch (e) {
-    throw new InternalServerError(LOG_SOURCE, 'e.message');
+    throw new InternalServerError({
+      logSource: LOG_SOURCE,
+      description: 'revokeRefreshTokenAction error',
+      details: { e },
+    });
   }
 };
