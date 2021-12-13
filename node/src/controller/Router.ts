@@ -8,7 +8,8 @@ const router = Router();
 router.get('/login', authMiddleware, asyncHandler(loginRoute));
 router.post('/token', authMiddleware, asyncHandler(tokenRoute));
 router.delete('/token', authMiddleware, asyncHandler(tokenRoute));
-router.get('/get', authMiddleware, asyncHandler(getActionRoute));
+router.get('/getPosts', authMiddleware, asyncHandler(getActionRoute));
+router.get('/getPost/:postId', authMiddleware, asyncHandler(getActionRoute));
 router.post('/post', authMiddleware, asyncHandler(postActionRoute));
 router.get('/error', errorRoute);
 

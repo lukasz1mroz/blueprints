@@ -33,15 +33,18 @@ export const loginAction = async (name: string, password: string): Promise<AuthR
     }
 
     // TODO: Consider moving auth functionality to separate server
-    const accessToken = jwt.sign(storedUser, accessTokenSecret, { expiresIn: '10s' });
-    const refreshToken = jwt.sign(storedUser, refreshTokenSecret);
-    refreshTokens.push(refreshToken);
+
+    // const accessToken = jwt.sign(storedUser, accessTokenSecret, { expiresIn: '10s' });
+    // const refreshToken = jwt.sign(storedUser, refreshTokenSecret);
+    // refreshTokens.push(refreshToken);
+
+    const accessToken = jwt.sign(storedUser, accessTokenSecret);
 
     return {
       status: 200,
       description: loginActionMessage,
       accessToken: accessToken,
-      refreshToken: refreshToken,
+      // refreshToken: refreshToken,
     };
   } catch (e) {
     throw new InternalServerError(LOG_SOURCE, 'Internal Server Error');

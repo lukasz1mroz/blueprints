@@ -1,5 +1,5 @@
 type GetPostActionResponse = {
-  data: string;
+  data: object | string;
   status: number;
 };
 

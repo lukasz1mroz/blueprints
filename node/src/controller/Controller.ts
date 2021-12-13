@@ -28,7 +28,7 @@ export const tokenRoute = async (req: RequestWithUser, res: Response): Promise<a
 };
 
 export const getActionRoute = async (req: RequestWithUser, res: Response): Promise<any> => {
-  const response = await getAction();
+  const response = await getAction(req.params.postId);
   return res.setHeader('Access-Control-Allow-Origin', '*').status(response.status).json(response);
 };
 
