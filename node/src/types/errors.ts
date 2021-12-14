@@ -9,34 +9,37 @@ export enum HttpStatusCode {
 
 export type ErrorProps = {
   logSource: string;
-  description: string;
+  description?: string;
   details?: any;
 };
 
-export type BaseErrorProps = ErrorProps & {
+export type CustomErrorProps = ErrorProps & {
   name: string;
+  url?: string;
   httpCode: HttpStatusCode;
 };
 
-export class BaseError extends Error {
+export class CustomError extends Error {
   name: string;
   httpCode: HttpStatusCode;
   logSource: string;
-  description: string;
-  details: Record<string, unknown> | undefined;
+  description: string | undefined;
+  details: object | undefined;
+  url: string | undefined;
 
-  constructor({ name, httpCode, logSource, description, details }: BaseErrorProps) {
+  constructor({ name, httpCode, logSource, description, details, url }: CustomErrorProps) {
     super(description);
     this.name = name;
     this.httpCode = httpCode;
     this.logSource = logSource;
     this.description = description;
     this.details = details;
+    this.url = url;
     Error.captureStackTrace(this, this.constructor);
   }
 }
 
-export class BadRequestError extends BaseError {
+export class BadRequestError extends CustomError {
   constructor({ logSource, description, details }: ErrorProps) {
     super({
       name: 'BAD REQUEST',
@@ -48,7 +51,7 @@ export class BadRequestError extends BaseError {
   }
 }
 
-export class InternalServerError extends BaseError {
+export class InternalServerError extends CustomError {
   constructor({ logSource, description, details }: ErrorProps) {
     super({
       name: 'INTERNAL SERVER ERROR',
@@ -60,7 +63,7 @@ export class InternalServerError extends BaseError {
   }
 }
 
-export class UnauthorizedError extends BaseError {
+export class UnauthorizedError extends CustomError {
   constructor({ logSource, description, details }: ErrorProps) {
     super({
       name: 'UNAUTHORIZED ERROR',
@@ -72,7 +75,7 @@ export class UnauthorizedError extends BaseError {
   }
 }
 
-export class ForbiddenError extends BaseError {
+export class ForbiddenError extends CustomError {
   constructor({ logSource, description, details }: ErrorProps) {
     super({
       name: 'FORBIDDEN ERROR',
