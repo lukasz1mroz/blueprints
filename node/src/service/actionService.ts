@@ -1,10 +1,10 @@
 import { logger } from '../utils/logger';
 import { asyncErrorHandler } from '../utils/asyncErrorHandler';
 import config from '../config/config';
-import { InternalServerError } from '../types/errors';
 import { GetPostActionResponse } from '../types/response';
 import axios from 'axios';
 import Redis from 'ioredis';
+import { writeFile, handleStream } from '../utils/streamHandler';
 
 const LOG_SOURCE = 'ActionService';
 const DEFAULT_EXPIRATION = config.cache.defaultExpiration;
@@ -21,6 +21,10 @@ export const getAction = async (postId?: string): Promise<GetPostActionResponse>
 
       const response = await axios.get(getUrl);
       await redis.setex(cacheKey, DEFAULT_EXPIRATION, JSON.stringify(response.data));
+
+      // Writing file and stream with FS
+      // writeFile('./data.json', response.data);
+      // handleStream('./data.json', './data-cp.json');
 
       logger.info('Get action finished', { source: LOG_SOURCE });
 
