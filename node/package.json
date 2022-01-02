@@ -26,6 +26,7 @@
     "ioredis": "^4.28.2",
     "jsonschema": "^1.4.0",
     "jsonwebtoken": "^8.5.1",
+    "redis": "^4.0.1",
     "redis-server": "^1.2.2",
     "winston": "^3.3.3"
   },
