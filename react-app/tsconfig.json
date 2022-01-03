@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2020", "dom"],
     "module": "esnext",
     "jsx": "react-jsx",
     "target": "es6",
@@ -16,10 +13,7 @@
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true
+    "isolatedModules": true
   },
-  "include": [
-    "src/*"
-  ]
+  "include": ["src/*"]
 }

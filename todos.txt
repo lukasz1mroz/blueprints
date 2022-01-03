@@ -1,4 +1,3 @@
-Node server: add caching
 React: sending requests with token, update FE
 AWS setup: Redis, Param Store, EC2 host, terraform
 Setup SDLC: oas3, md, script
