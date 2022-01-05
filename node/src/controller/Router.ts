@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import { Router } from 'express';
 import { loginRoute, tokenRoute, errorRoute, getActionRoute, postActionRoute } from './Controller';
-import authMiddleware from '../Middleware/AuthMiddleware';
+import authMiddleware from '../middleware/AuthMiddleware';
 
 const router = Router();
 

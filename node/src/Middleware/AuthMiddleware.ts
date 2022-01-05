@@ -4,7 +4,7 @@ import { Response, NextFunction } from 'express';
 import { HEADER_AUTHORIZATION } from '../utils/constants';
 import { BadRequestError, ForbiddenError, UnauthorizedError } from '../types/errors';
 import { logger } from '../utils/logger';
-import config from '../config/config';
+import { config } from '../../config/index';
 import { RequestWithUser } from 'src/types/request';
 
 const LOG_SOURCE = 'tokenValidator';

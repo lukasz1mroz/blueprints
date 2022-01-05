@@ -1,4 +1,10 @@
-React: sending requests with token, update FE
-AWS setup: Redis, Param Store, EC2 host, terraform
+Structure: 
+    Apigee setup - policies, proxies, resources, targets
+    Scripts - Jenkins deploy get pass
+    Testing - UT IT
+    SDLC
+AWS setup: Redis, EC2 host, terraform
 Setup SDLC: oas3, md, script
 Setup devops: Docker, Jenkins
+
+React: sending requests with token, update FE

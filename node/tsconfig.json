@@ -3,11 +3,12 @@
     "lib": ["es2020"],
     "baseUrl": "./",
     "module": "commonjs",
+    "resolveJsonModule": true,
     "target": "es6",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/*", "src/config"]
+  "include": ["src/*", "config", "app.ts"]
 }

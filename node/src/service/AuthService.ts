@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import { InternalServerError } from '../types/errors';
 import { AuthResponse } from '../types/response';
 import { User } from '../types/users';
-import config from '../config/config';
+import { config } from '../../config/index';
 
 const LOG_SOURCE = 'AuthService';
 const users: Array<User> = [];
