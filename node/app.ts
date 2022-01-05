@@ -3,10 +3,10 @@ import expressWinston from 'express-winston';
 import bodyParser from 'body-parser';
 import * as Sentry from '@sentry/node';
 
-import config from './config/config';
-import Router from './controller/Router';
-import { expressErrorHandler } from './utils/errorHandler';
-import { logger, expressWinstonConfig } from './utils/logger';
+import { config } from './config/index';
+import Router from './src/controller/Router';
+import { expressErrorHandler } from './src/utils/errorHandler';
+import { logger, expressWinstonConfig } from './src/utils/logger';
 
 const app = express();
 const port = 3000;
