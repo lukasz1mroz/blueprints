@@ -1,7 +1,7 @@
 Structure: 
     Apigee setup - policies, proxies, resources, targets
     Scripts - Jenkins deploy get pass
-    Testing - UT IT
+    Testing - IT
     SDLC
 AWS setup: Redis, EC2 host, terraform
 Setup SDLC: oas3, md, script

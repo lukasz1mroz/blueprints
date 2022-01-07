@@ -1,11 +1,4 @@
-export enum HttpStatusCode {
-  OK = 200,
-  BAD_REQUEST = 400,
-  UNAUTHORIZED = 401,
-  FORBIDDEN = 403,
-  NOT_FOUND = 404,
-  INTERNAL_SERVER = 500,
-}
+import { BAD_GATEWAY, BAD_REQUEST, FORBIDDEN, INTERNAL_SERVER_ERROR, UNAUTHORIZED } from 'http-status-codes';
 
 export type ErrorProps = {
   logSource: string;
@@ -16,12 +9,12 @@ export type ErrorProps = {
 export type CustomErrorProps = ErrorProps & {
   name: string;
   url?: string;
-  httpCode: HttpStatusCode;
+  httpCode: number;
 };
 
 export class CustomError extends Error {
   name: string;
-  httpCode: HttpStatusCode;
+  httpCode: number;
   logSource: string;
   description: string | undefined;
   details: object | undefined;
@@ -43,7 +36,7 @@ export class BadRequestError extends CustomError {
   constructor({ logSource, description, details }: ErrorProps) {
     super({
       name: 'BAD REQUEST',
-      httpCode: HttpStatusCode.BAD_REQUEST,
+      httpCode: BAD_REQUEST,
       logSource,
       description,
       details,
@@ -55,7 +48,7 @@ export class InternalServerError extends CustomError {
   constructor({ logSource, description, details }: ErrorProps) {
     super({
       name: 'INTERNAL SERVER ERROR',
-      httpCode: HttpStatusCode.INTERNAL_SERVER,
+      httpCode: INTERNAL_SERVER_ERROR,
       logSource,
       description,
       details,
@@ -66,8 +59,8 @@ export class InternalServerError extends CustomError {
 export class UnauthorizedError extends CustomError {
   constructor({ logSource, description, details }: ErrorProps) {
     super({
-      name: 'UNAUTHORIZED ERROR',
-      httpCode: HttpStatusCode.UNAUTHORIZED,
+      name: 'Unauthorized ERROR',
+      httpCode: UNAUTHORIZED,
       logSource,
       description,
       details,
@@ -79,7 +72,19 @@ export class ForbiddenError extends CustomError {
   constructor({ logSource, description, details }: ErrorProps) {
     super({
       name: 'FORBIDDEN ERROR',
-      httpCode: HttpStatusCode.FORBIDDEN,
+      httpCode: FORBIDDEN,
+      logSource,
+      description,
+      details,
+    });
+  }
+}
+
+export class BadGatewayError extends CustomError {
+  constructor({ logSource, description, details }: ErrorProps) {
+    super({
+      name: 'BAD GATEWAY ERROR',
+      httpCode: BAD_GATEWAY,
       logSource,
       description,
       details,

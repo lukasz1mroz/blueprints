@@ -1,4 +1,7 @@
 export type Config = {
+  api: {
+    url: string;
+  };
   auth: {
     accessTokenSecret: string;
     refreshTokenSecret: string;

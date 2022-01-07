@@ -2,7 +2,6 @@ import axios from 'axios';
 import { CustomError } from '../types/errors';
 
 export const asyncErrorHandler = (logSource: string, e?: any) => {
-  console.log(e);
   const error = axios.isAxiosError(e)
     ? new CustomError({
         name: 'Axios error',
