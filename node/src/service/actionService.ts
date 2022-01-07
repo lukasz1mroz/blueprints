@@ -1,12 +1,12 @@
-import { logger } from '../utils/logger';
+import { request } from './RequestService';
 import { asyncErrorHandler } from '../utils/asyncErrorHandler';
 import { config } from '../../config/index';
 import { GetPostActionResponse } from '../types/response';
-import axios from 'axios';
 import Redis from 'ioredis';
 
 const LOG_SOURCE = 'ActionService';
 const DEFAULT_EXPIRATION = config.cache.defaultExpiration;
+const API_URL = config.api.url;
 const redis = new Redis();
 
 export const getAction = async (postId?: string): Promise<GetPostActionResponse> => {
@@ -14,18 +14,12 @@ export const getAction = async (postId?: string): Promise<GetPostActionResponse>
     const cacheKey = postId ? `post_${postId}` : 'posts';
 
     if (!(await redis.exists(cacheKey))) {
-      const getUrl = postId
-        ? `https://jsonplaceholder.typicode.com/posts/${postId}`
-        : 'https://jsonplaceholder.typicode.com/posts';
-
-      const response = await axios.get(getUrl);
+      const response = await request('GET', API_URL, postId);
       await redis.setex(cacheKey, DEFAULT_EXPIRATION, JSON.stringify(response.data));
 
       // Writing file and stream with FS
       // writeFile('./data.json', response.data);
       // handleStream('./data.json', './data-cp.json');
-
-      logger.info('Get action finished', { source: LOG_SOURCE });
 
       return {
         data: response.data,
@@ -45,9 +39,7 @@ export const getAction = async (postId?: string): Promise<GetPostActionResponse>
 
 export const postAction = async (): Promise<GetPostActionResponse> => {
   try {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/postss');
-
-    logger.info('Post action finished', { source: LOG_SOURCE });
+    const response = await request('POST', API_URL);
 
     return {
       data: 'This is successful response',

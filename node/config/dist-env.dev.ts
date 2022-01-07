@@ -6,6 +6,9 @@
 import packagejson from '../package.json';
 
 module.exports = {
+  api: {
+    url: 'https://jsonplaceholder.typicode.com/posts',
+  },
   auth: {
     accessTokenSecret: '$ACCESS_TOKEN_SECRET',
     refreshTokenSecret: '$REFRESH_TOKEN_SECRET',

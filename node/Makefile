@@ -14,4 +14,4 @@ config\:gen:
 	$(call check_defined, CONFIG_SOURCE, Source configuration)
 	$(call check_defined, CONFIG_TARGET, Target configuration)
 
-	(source ./scripts/aws-temp-key.sh && source ./scripts/kms-get-parameters.sh)
+	(source ./scripts/kms-get-parameters.sh)
