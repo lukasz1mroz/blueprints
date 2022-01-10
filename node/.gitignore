@@ -1,5 +1,5 @@
 # Config 
-config/env.*.js
+config/env.*.ts
 
 # Logs
 logs
