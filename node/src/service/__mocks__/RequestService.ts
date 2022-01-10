@@ -21,7 +21,7 @@ const posts = [
 
 export const request = (method: string, url: string, param: string) => {
   return new Promise((resolve, reject) => {
-    //if (method === 'POST') resolve({ data: 'Post success', status: 200 });
+    if (method === 'POST') resolve({ data: 'Post success', status: 200 });
     const data = param ? posts.find((post) => post.id === Number(param)) : posts;
     data === undefined ? reject({ data: 'Error', status: 500 }) : resolve({ data: data, status: 200 });
   });
