@@ -2,6 +2,9 @@ export type Config = {
   api: {
     url: string;
   };
+  app: {
+    port: number;
+  };
   auth: {
     accessTokenSecret: string;
     refreshTokenSecret: string;

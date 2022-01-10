@@ -9,6 +9,9 @@ module.exports = {
   api: {
     url: 'https://jsonplaceholder.typicode.com/posts',
   },
+  app: {
+    port: 3000,
+  },
   auth: {
     accessTokenSecret:
       '29306ba92b5b7630e9bac47feb1eca8be6e276aeb8bd4d4d8ba45410b18972c654a7c9e3c616ddd3904a46282c29e9cacdba4afea12f33aa23ff1ffa2b97b4a2',
