@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/blueprints
+hooks:
+  AfterInstall:
+    - location: scripts/cd-after-install.sh
+      runas: root
+      timeout: 300
+  ApplicationStart:
+    - location: scripts/cd-app-start.sh
+      runas: root
+      timeout: 60

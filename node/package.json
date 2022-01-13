@@ -6,10 +6,16 @@
   "main": "index.ts",
   "scripts": {
     "test": "jest",
-    "build": "babel src/ --extensions .ts,.js -d dist",
-    "start": "nodemon",
-    "start:debug": "node --inspect --require ts-node/register src/index.ts",
-    "start:redis": "redis-server"
+    "build:tsCheck": "tsc --build tsconfig.json",
+    "build:package": "cp package.json ./dist",
+    "build:scripts": "cp -r ./scripts ./dist",
+    "build:appspec": "cp ./appspec.yml ./dist",
+    "build:files": "babel ./ --extensions .ts,.js -d dist --ignore **/__mocks__,**/node_modules,**/*.test.js",
+    "build": "rm -rf ./dist && npm run build:tsCheck && npm run build:files && npm run build:package && npm run build:scripts && npm run build:appspec",
+    "start:nodemon": "nodemon",
+    "start:debug": "node --inspect -r ts-node/register -r tsconfig-paths/register index.ts",
+    "start:redis": "redis-server",
+    "serve": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -28,6 +34,7 @@
     "jsonschema": "^1.4.0",
     "jsonwebtoken": "^8.5.1",
     "redis": "^4.0.1",
+    "redis-cli": "^2.1.2",
     "redis-server": "^1.2.2",
     "winston": "^3.3.3"
   },

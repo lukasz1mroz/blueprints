@@ -3,7 +3,10 @@ import { Config } from '../src/types/config';
 const getConfig = (): Config => {
   const failure = 0;
   const env = process.env.DEPLOY_ENV;
-  const envConfigFile = `./env.${env}.ts`;
+
+  if (!env) console.error('\n DEPLOY_ENV variable is missing');
+
+  const envConfigFile = `./env.${env}`;
   let envConfig;
 
   try {

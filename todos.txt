@@ -1,7 +1,5 @@
-Structure: 
-    Apigee setup - policies, proxies, resources, targets
-    Scripts - Jenkins deploy get pass
-AWS setup: Redis, EC2 host, terraform
+Scripts - Jenkins deploy get pass
+AWS setup: terraform
 Setup SDLC: oas3, md, script
 Setup devops: Docker, Jenkins
 
