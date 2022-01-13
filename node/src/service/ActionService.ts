@@ -2,12 +2,13 @@ import { request } from './RequestService';
 import { asyncErrorHandler } from '../utils/asyncErrorHandler';
 import { config } from '../../config/index';
 import { GetPostActionResponse } from '../types/response';
-import Redis from 'ioredis';
+import { startRedisClient } from '../utils/redisWrapper';
 
 const LOG_SOURCE = 'ActionService';
 const DEFAULT_EXPIRATION = config.cache.defaultExpiration;
 const API_URL = config.api.url;
-const redis = new Redis();
+
+const redis = startRedisClient();
 
 export const getAction = async (postId?: string): Promise<GetPostActionResponse> => {
   try {

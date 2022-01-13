@@ -2,8 +2,8 @@ import express from 'express';
 import expressWinston from 'express-winston';
 import bodyParser from 'body-parser';
 import * as Sentry from '@sentry/node';
-import RedisServer from 'redis-server';
 
+import { startLocalRedis, stopLocalRedis } from './src/utils/redisWrapper';
 import { config } from './config/index';
 import Router from './src/controller/Router';
 import { expressErrorHandler } from './src/utils/errorHandler';
@@ -12,10 +12,8 @@ import { logger, expressWinstonConfig } from './src/utils/logger';
 export const expressApp = () => {
   const app = express();
   const port = config.app.port;
-  const redisServer = new RedisServer();
 
-  // Open and close redis sever here when redis-server type can be used
-  redisServer.open(() => logger.info('Redis server opened'));
+  const localRedis = startLocalRedis();
 
   Sentry.init(config.sentryClient);
   app.use(Sentry.Handlers.tracingHandler());
@@ -35,7 +33,7 @@ export const expressApp = () => {
 
   const shutdown = async () => {
     try {
-      redisServer.close(() => logger.info('Redis server stopped'));
+      await stopLocalRedis(localRedis);
       await http.close(() => logger.info('App stopped'));
       setTimeout(() => process.exit(0));
     } catch (e) {

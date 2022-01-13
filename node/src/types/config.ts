@@ -1,4 +1,5 @@
 export type Config = {
+  env: string;
   api: {
     url: string;
   };
@@ -17,6 +18,10 @@ export type Config = {
     release: string;
   };
   cache: {
+    redis: {
+      port: number;
+      url: string;
+    };
     defaultExpiration: number;
   };
 };

@@ -31,4 +31,7 @@ for PARAM in $(echo "$APPROVAL_PARAMETERS" | jq -r "to_entries|map(\"\(.key)=\(.
     export ${PARAM}
 done
 
-envsubst "${VARS_TO_SUBSTITUTE}" < ./config/dist-env.$CONFIG_TEMPLATE.ts > ./config/env.$CONFIG_TARGET.ts
+TEMPLATE_FILE=$(cd ../config && ls | grep dist-env.$CONFIG_TEMPLATE.*)
+TARGET_FILE=$(cd ../config && ls | grep ^env.$CONFIG_TARGET.*)
+
+envsubst "${VARS_TO_SUBSTITUTE}" < ../config/$TEMPLATE_FILE > ../config/$TARGET_FILE

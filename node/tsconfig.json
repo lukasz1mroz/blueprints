@@ -10,7 +10,19 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "typeRoots": ["./typings", "node_modules/@types"],
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "noEmit": true
   },
-  "include": ["src/*", "config", "app.ts"]
+  "include": ["src/*", "config", "app.ts"],
+  "exclude": [
+    "**/__mocks__",
+    "docs",
+    "dist",
+    "logs",
+    "node_modules",
+    "scripts",
+    "**/*.test.js",
+    "**/*.test.ts",
+    "config/dist-env.*"
+  ]
 }
