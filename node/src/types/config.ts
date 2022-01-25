@@ -10,6 +10,12 @@ export type Config = {
     accessTokenSecret: string;
     refreshTokenSecret: string;
   };
+  influx: {
+    dbUrl: string;
+    token: string;
+    org: string;
+    bucket: string;
+  };
   sentryClient: {
     dsn: string;
     tracesSampleRate: number;
