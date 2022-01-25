@@ -5,7 +5,7 @@
 
 import packagejson from '../package.json';
 
-module.exports = {
+export = {
   env: 'local',
   api: {
     url: 'https://jsonplaceholder.typicode.com/posts',
@@ -16,6 +16,12 @@ module.exports = {
   auth: {
     accessTokenSecret: '$ACCESS_TOKEN_SECRET',
     refreshTokenSecret: '$REFRESH_TOKEN_SECRET',
+  },
+  influx: {
+    dbUrl: '$INFLUX_DB_URL',
+    token: '$INFLUX_TOKEN',
+    org: '$INFLUX_ORG',
+    bucket: '$INFLUX_BUCKET',
   },
   sentryClient: {
     dsn: '$SENTRY_DSN',

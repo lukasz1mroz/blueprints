@@ -16,7 +16,6 @@ export const stopLocalRedis = (redisServer: RedisServer) =>
   redisServer.close(() => logger.info('Local Redis server closed'));
 
 export const startRedisClient = () => {
-  console.log(config);
   const redisClient = new Redis(
     (config.env !== 'local' && {
       port: config.cache.redis.port,
