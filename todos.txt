@@ -1,6 +1,14 @@
-Scripts - Jenkins deploy get pass
-AWS setup: terraform
-Setup SDLC: oas3, md, script
-Setup devops: Docker, Jenkins
+SDLC: 
+    - oas3
+    - md
+    
+Devops: 
+    - Docker
+    - Jenkins
+    - Terraform
 
-React: sending requests with token, update FE
+React: 
+    - Add register and login calls
+    - Info on logged in user
+    - Add facebook login 
+    - Pizza: fetch person API, send to backend and return pizza pic

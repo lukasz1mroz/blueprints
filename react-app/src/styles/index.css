@@ -1,6 +1,7 @@
 body {
   font: 14px 'Century Gothic', Futura, sans-serif;
   margin: 20px;
+  background-color: beige;
 }
 
 .mainContent {
@@ -16,4 +17,9 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.wrapper {
+  padding: 20px;
+  background-color: bisque;
 }
