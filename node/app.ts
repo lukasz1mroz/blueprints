@@ -2,6 +2,7 @@ import express from 'express';
 import expressWinston from 'express-winston';
 import bodyParser from 'body-parser';
 import * as Sentry from '@sentry/node';
+import cors from 'cors';
 import responseTime from 'response-time';
 
 import { startLocalRedis, stopLocalRedis } from './src/utils/redisWrapper';
@@ -19,6 +20,7 @@ export const expressApp = () => {
   Sentry.init(config.sentryClient);
   app.use(Sentry.Handlers.tracingHandler());
 
+  app.use(cors());
   app.use(responseTime());
   app.use(expressWinston.logger(expressWinstonConfig('info')));
   app.use(bodyParser.json());

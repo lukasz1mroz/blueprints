@@ -1,0 +1,9 @@
+.loginWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttonWrapper {
+  padding-top: 2em;
+}

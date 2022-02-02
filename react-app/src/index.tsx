@@ -1,20 +1,27 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter, Route, Routes } from 'react-router-dom';
-import MainContent from './MainContent';
-import './Styles.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import MainContent from './components/MainContent';
+import useToken from './hooks/useToken';
+import Login from './components/Login';
+import './styles/index.css';
 
-class Main extends React.Component {
-  render() {
-    return (
-      <HashRouter>
+const Main = () => {
+  const { token, setToken } = useToken();
+
+  if (!token) {
+    return <Login setToken={setToken} />;
+  }
+
+  return (
+    <div className="wrapper">
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainContent />} />
         </Routes>
-      </HashRouter>
-    );
-  }
-}
+      </BrowserRouter>
+    </div>
+  );
+};
 
 ReactDOM.render(<Main />, document.getElementById('root'));
 
