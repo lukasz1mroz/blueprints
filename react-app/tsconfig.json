@@ -16,5 +16,11 @@
     "isolatedModules": true,
     "noEmit": true
   },
-  "include": ["src/*", "src/handlers/ApiHandler.tsx", "src/components/MainContent.tsx", "src/components/Login.tsx"]
+  "include": [
+    "src/*",
+    "src/handlers/ApiHandler.tsx",
+    "src/components/MainContent.tsx",
+    "src/components/Login.tsx",
+    "src/handlers/ApiCalls.tsx"
+  ]
 }
