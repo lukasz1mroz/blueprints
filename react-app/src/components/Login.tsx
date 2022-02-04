@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import api from '../ApiCalls';
+import api from '../handlers/ApiCalls';
 
 import '../styles/Login.css';
 
