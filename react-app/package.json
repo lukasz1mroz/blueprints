@@ -24,8 +24,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "webpackBuild": "webpack --mode=development --config webpack.config.js",
-    "webpackStart": "webpack-dev-server --mode=development --config webpack.config.js --watch-poll"
+    "webpack-build": "webpack --mode=production --config webpack.config.js",
+    "webpack-start": "webpack-dev-server --mode=development --config webpack.config.js --watch-poll"
   },
   "eslintConfig": {
     "extends": [
@@ -46,7 +46,14 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "babel-loader": "^8.1.0",
     "css-loader": "^5.2.7",
+    "html-loader": "^3.1.0",
+    "html-webpack-plugin": "^5.5.0",
     "style-loader": "^2.0.0",
     "typescript": "^4.5.2",
     "webpack-cli": "^4.9.1"
