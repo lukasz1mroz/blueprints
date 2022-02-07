@@ -1,7 +1,12 @@
+// Using dotenv file
+// import dotenv from 'dotenv';
+// dotenv.config();
+// property: process.env.NAME;
+
 import packagejson from '../package.json';
 
-export = {
-  env: 'dev',
+module.exports = {
+  env: 'local',
   api: {
     url: 'https://jsonplaceholder.typicode.com/posts',
   },
@@ -26,10 +31,6 @@ export = {
     release: `blueprints@${packagejson.version}`,
   },
   cache: {
-    redis: {
-      port: 6379,
-      url: '$REDIS_URL',
-    },
     defaultExpiration: 60,
   },
 };
