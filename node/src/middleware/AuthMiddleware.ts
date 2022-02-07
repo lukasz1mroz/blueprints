@@ -30,7 +30,7 @@ export default (req: RequestWithUser, res: Response, next: NextFunction) => {
     if (err) throw new ForbiddenError({ logSource: LOG_SOURCE, description: 'Invalid bearer token', details: { err } });
 
     logger.info('Bearer token validation successful', { source: LOG_SOURCE });
-    req.user = req.url === '/refreshToken' ? { name: user?.name } : user;
+    req.user = user;
     next();
   });
 };
