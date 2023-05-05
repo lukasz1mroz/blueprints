@@ -14,8 +14,7 @@
     "build": "rm -rf ./dist && npm run build:tsCheck && npm run build:files && npm run build:package && npm run build:scripts && npm run build:appspec",
     "start:nodemon": "nodemon",
     "start:debug": "node --inspect -r ts-node/register -r tsconfig-paths/register index.ts",
-    "start:redis": "redis-server",
-    "serve": "node index.js"
+    "serve": "ts-node index.ts"
   },
   "author": "",
   "license": "ISC",
