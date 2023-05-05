@@ -12,7 +12,7 @@ const getConfig = (): Config => {
   try {
     envConfig = require(envConfigFile) as Config;
   } catch (e) {
-    console.error();
+    console.log(e)
     process.exit(failure);
   }
 
