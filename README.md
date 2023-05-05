@@ -10,7 +10,7 @@ Secrets are stored in AWS paremeter store and local configs can be updated with 
 
 Few scripts have been pepared in _/node/scripts_ repository which serve the following purposes:
 
-- Update local config secrets
+- Update local and dev config secrets
 - Deploy code to AWS
 - Starting the application in AWS
 

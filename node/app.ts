@@ -24,7 +24,6 @@ export const expressApp = () => {
   app.use(responseTime());
   app.use(expressWinston.logger(expressWinstonConfig('info')));
   app.use(bodyParser.json());
-  // app.use(express.json());
 
   app.use('/', Router);
 
