@@ -16,6 +16,8 @@ export const loginAction = async (name: string, password: string): Promise<AuthR
   try {
     let loginActionMessage = 'User authenticated';
 
+    // TODO: move users to persistent storage
+    
     if (!users.find((u) => u.name === name)) {
       loginActionMessage = 'User added and authenticated';
       const hashedPassword = await bcrypt.hash(password, 10);
