@@ -9,6 +9,7 @@ export type Config = {
   auth: {
     accessTokenSecret: string;
     refreshTokenSecret: string;
+    expiresIn: string;
   };
   influx: {
     dbUrl: string;

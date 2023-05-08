@@ -8,6 +8,7 @@ type AuthResponse = {
   refreshToken?: string;
   description: string;
   status: number;
+  expiresIn?: string;
 };
 
 export { GetPostActionResponse, AuthResponse };
