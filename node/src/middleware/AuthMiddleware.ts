@@ -16,7 +16,7 @@ export default (req: RequestWithUser, res: Response, next: NextFunction) => {
 
   if (authString === 'null') throw new UnauthorizedError({ logSource: LOG_SOURCE, description: 'Missing token' });
 
-  if (req.url === '/login') {
+  if (req.url === '/login' || req.url === '/register') {
     const credentials = Buffer.from(authString, 'base64').toString().split(':');
 
     if (!credentials || credentials.length != 2)
@@ -26,7 +26,7 @@ export default (req: RequestWithUser, res: Response, next: NextFunction) => {
     return next();
   }
 
-  jwt.verify(authString, req.url === '/token' ? refreshTokenSecret : accessTokenSecret, (err, user) => {
+  jwt.verify(authString, req.url === '/refreshToken' || req.url === '/removeToken' ? refreshTokenSecret : accessTokenSecret, (err, user) => {
     if (err) throw new ForbiddenError({ logSource: LOG_SOURCE, description: 'Invalid bearer token', details: { err } });
 
     logger.info('Bearer token validation successful', { source: LOG_SOURCE });

@@ -1,7 +1,7 @@
 import { Response, Request, NextFunction } from 'express';
 import { User } from '../types/users';
 import { getAction, postAction } from '../service/ActionService';
-import { loginAction, refreshAccessTokenAction, revokeRefreshTokenAction } from '../service/AuthService';
+import { loginAction, registerAction, refreshAccessTokenAction, removeRefreshTokenAction } from '../service/AuthService';
 import { InternalServerError } from '../types/errors';
 import { validateJSONData } from '../utils/validators';
 import { RequestWithUser } from '../types/request';
@@ -9,16 +9,17 @@ import { HEADER_AUTHORIZATION } from '../utils/constants';
 
 const LOG_SOURCE = 'Controller';
 
-export const loginRoute = async (req: RequestWithUser, res: Response): Promise<any> => {
+export const userRoute = async (req: RequestWithUser, res: Response): Promise<any> => {
   const user = req.user as User;
-  const response = await loginAction(user.name, user.password);
+
+  const response = req.method === 'POST' ? await registerAction(user.name, user.password) : await loginAction(user.name, user.password);
   return res.header('Access-Control-Allow-Origin', '*').status(response.status).json(response);
 };
 
 export const tokenRoute = async (req: RequestWithUser, res: Response): Promise<any> => {
   if (req.method === 'DELETE') {
     const token = req.headers[HEADER_AUTHORIZATION]?.split(' ')[1] as string;
-    const response = await revokeRefreshTokenAction(token);
+    const response = await removeRefreshTokenAction(token);
     return res.header('Access-Control-Allow-Origin', '*').status(response.status).json(response);
   }
   const user = req.user as User;
