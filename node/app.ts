@@ -2,20 +2,21 @@ import express from 'express';
 import expressWinston from 'express-winston';
 import bodyParser from 'body-parser';
 import * as Sentry from '@sentry/node';
+import '@sentry/tracing';
 import cors from 'cors';
 import responseTime from 'response-time';
 
-import { startLocalRedis, stopLocalRedis } from './src/utils/redisWrapper';
+import { startLocalRedis, stopLocalRedis} from './src/utils/redisWrapper';
 import { config } from './config/index';
 import Router from './src/controller/Router';
 import { expressErrorHandler } from './src/utils/errorHandler';
 import { logger, expressWinstonConfig } from './src/utils/logger';
 
-export const expressApp = () => {
+export const expressApp = async () => {
   const app = express();
   const port = config.app.port;
 
-  const localRedis = startLocalRedis();
+  const localRedis = await startLocalRedis();
 
   Sentry.init(config.sentryClient);
   app.use(Sentry.Handlers.tracingHandler());
