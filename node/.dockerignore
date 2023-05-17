@@ -1,0 +1,10 @@
+.git
+.gitignore
+README.md
+docker-compose.*
+node_modules
+config/env.*.js
+config/dist-env.*.js
+.scannerwork
+lib
+.vscode
