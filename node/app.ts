@@ -6,17 +6,14 @@ import '@sentry/tracing';
 import cors from 'cors';
 import responseTime from 'response-time';
 
-import { startLocalRedis, stopLocalRedis} from './src/utils/redisWrapper';
 import { config } from './config/index';
 import Router from './src/controller/Router';
 import { expressErrorHandler } from './src/utils/errorHandler';
 import { logger, expressWinstonConfig } from './src/utils/logger';
 
-export const expressApp = async () => {
+export const expressApp = () => {
   const app = express();
   const port = config.app.port;
-
-  const localRedis = await startLocalRedis();
 
   Sentry.init(config.sentryClient);
   app.use(Sentry.Handlers.tracingHandler());
@@ -37,7 +34,6 @@ export const expressApp = async () => {
 
   const shutdown = async () => {
     try {
-      await stopLocalRedis(localRedis);
       await http.close(() => logger.info('App stopped'));
       setTimeout(() => process.exit(0));
     } catch (e) {
