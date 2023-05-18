@@ -16,7 +16,7 @@ const sendMetricsToInflux = async (point: Point) => {
     await writeApi.writePoint(point);
     writeApi
       .close()
-      .then(() => console.log('Influx data sending successful'))
+      .then()
       .catch((e) => console.error('Influx data sending error: ', e));
   } catch (e) {
     logger.error(e as string, { logSource: LOG_SOURCE });
