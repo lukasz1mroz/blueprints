@@ -32,5 +32,9 @@ module.exports = {
   },
   cache: {
     defaultExpiration: 60,
+    redis: {
+      port: 6973,
+      host: '127.0.0.1',
+    },
   },
 };
