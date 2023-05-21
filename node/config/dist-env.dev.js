@@ -11,6 +11,7 @@ module.exports = {
   auth: {
     accessTokenSecret: '$ACCESS_TOKEN_SECRET',
     refreshTokenSecret: '$REFRESH_TOKEN_SECRET',
+    expiresIn: '30s',
   },
   influx: {
     dbUrl: '$INFLUX_DB_URL',
@@ -31,5 +32,12 @@ module.exports = {
       url: '$REDIS_URL',
     },
     defaultExpiration: 60,
+  },
+  db: {
+    user: '$DB_USER',
+    host: 'localhost',
+    database: 'blueprints',
+    password: '$DB_PASSWORD',
+    port: 5432,
   },
 };
