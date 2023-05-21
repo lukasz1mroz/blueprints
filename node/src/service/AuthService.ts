@@ -5,9 +5,9 @@ import { InternalServerError } from '../types/errors';
 import { AuthResponse } from '../types/response';
 import { User } from '../types/users';
 import { config } from '../../config/index';
+import {dbQuery} from './DbService';
 
 const LOG_SOURCE = 'AuthService';
-const users: Array<User> = [];
 const accessTokenSecret = config.auth.accessTokenSecret as string;
 const refreshTokenSecret = config.auth.refreshTokenSecret as string;
 const expiresIn = config.auth.expiresIn as string;
@@ -17,7 +17,9 @@ export const registerAction = async (name: string, password: string): Promise<Au
   try {
     let registerActionMessage = 'User registered';
 
-    if (users.find((u) => u.name === name)) {
+    const dbResp = await dbQuery({text: 'SELECT * FROM users'})
+
+    if (dbResp.rows.find((u) => u.name === name)) {
       registerActionMessage = 'User already registered';
       return {
         status: 400,
@@ -26,7 +28,8 @@ export const registerAction = async (name: string, password: string): Promise<Au
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    users.push({ name: name, password: hashedPassword });
+
+    await dbQuery({text: 'INSERT INTO users (name, password) VALUES ($1, $2)', values: [name, hashedPassword]})
 
     return {
       status: 200,
@@ -41,7 +44,9 @@ export const loginAction = async (name: string, password: string): Promise<AuthR
   try {
     let loginActionMessage = 'User authenticated';
     
-    if (!users.find((u) => u.name === name)) {
+    const dbResp = await dbQuery({text: 'SELECT * FROM users'})
+    
+    if (!dbResp.rows.find((u) => u.name === name)) {
       loginActionMessage = 'User not registered';
       return {
         status: 401,
@@ -49,7 +54,7 @@ export const loginAction = async (name: string, password: string): Promise<AuthR
       };
     }
 
-    const storedUser = users.find((u) => u.name === name) as User;
+    const storedUser = dbResp.rows.find((u) => u.name === name) as User;
 
     if (!(await bcrypt.compare(password, storedUser.password))) {
       loginActionMessage = 'Wrong password';
@@ -71,7 +76,6 @@ export const loginAction = async (name: string, password: string): Promise<AuthR
       expiresIn: expiresIn 
     };
   } catch (e) {
-    console.log('err: ', e)
     throw new InternalServerError({ logSource: LOG_SOURCE, description: 'Internal Server Error', details: e });
   }
 };
