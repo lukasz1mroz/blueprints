@@ -18,10 +18,6 @@ export const getAction = async (postId?: string): Promise<GetPostActionResponse>
       const response = await request('GET', API_URL, postId);
       await redis.setex(cacheKey, DEFAULT_EXPIRATION, JSON.stringify(response.data));
 
-      // Writing file and stream with FS
-      // writeFile('./data.json', response.data);
-      // handleStream('./data.json', './data-cp.json');
-
       return {
         data: response.data,
         status: 200,
