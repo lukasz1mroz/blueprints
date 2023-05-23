@@ -2,6 +2,10 @@ import {Pool} from 'pg'
 import { logger } from '../utils/logger';
 import { config } from '../../config/index';
 
+if (process.env.CONTAINER) {
+    config.db.host = 'postgres'
+}
+
 const pool = new Pool(config.db)
 
 export const dbQuery = async (queryObj) => {
