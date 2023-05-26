@@ -14,8 +14,9 @@
     "build": "rm -rf ./dist && npm run build:tsCheck && npm run build:files && npm run build:package && npm run build:scripts && npm run build:appspec",
     "start:nodemon": "nodemon",
     "start:debug": "node --inspect -r ts-node/register -r tsconfig-paths/register index.ts",
-    "start:local-redis": "docker compose -f ./docker-compose-redis.yml up",
-    "start:local-postgres": "docker compose -f ./docker-compose-db.yml up",
+    "start:redis": "docker compose -f ./docker-compose-redis.yml up",
+    "start:postgres": "docker compose -f ./docker-compose-db.yml up",
+    "start:app": "docker compose -f ./docker-compose-db.yml up",
     "serve": "ts-node index.ts"
   },
   "author": "",
