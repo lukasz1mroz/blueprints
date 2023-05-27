@@ -1,4 +1,4 @@
-# Config 
+# Config
 config/env.*.ts
 
 # Logs
@@ -119,3 +119,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Project specific requirement
+package-lock.json
