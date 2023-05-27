@@ -1,4 +1,5 @@
 jest.mock('./RequestService');
+jest.mock('../utils/redisWrapper.ts');
 
 import { getAction, postAction } from './ActionService';
 
@@ -17,7 +18,7 @@ describe('ActionService tests', () => {
   it('should throw error', async () => {
     const WRONG_POST_ID = 'wrong_id';
 
-    const errorResponse = await getAction(WRONG_POST_ID);
+    const errorResponse = getAction(WRONG_POST_ID);
 
     await expect(errorResponse).rejects.toMatchObject({ data: 'Error', status: 500 });
   });
