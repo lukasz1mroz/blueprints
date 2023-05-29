@@ -1,4 +1,6 @@
-import { loginAction, refreshAccessTokenAction, revokeRefreshTokenAction } from './AuthService';
+jest.mock('./DbService');
+
+import { loginAction, refreshAccessTokenAction, removeRefreshTokenAction } from './AuthService';
 
 describe('AuthService tests', () => {
   it('should return access token', async () => {
@@ -13,8 +15,8 @@ describe('AuthService tests', () => {
     expect(response).toMatchObject({ status: 200, description: expect.any(String), accessToken: expect.any(String) });
   });
 
-  it('should revoke refresh token', async () => {
-    const response = await revokeRefreshTokenAction('refresh_token');
+  it('should remove refresh token', async () => {
+    const response = await removeRefreshTokenAction('refresh_token');
 
     expect(response).toMatchObject({ status: 204, description: expect.any(String) });
   });
