@@ -16,7 +16,7 @@
     "start:debug": "node --inspect -r ts-node/register -r tsconfig-paths/register index.ts",
     "start:redis": "docker compose -f ./docker-compose-redis.yml up",
     "start:postgres": "docker compose -f ./docker-compose-db.yml up",
-    "start:app": "docker compose -f ./docker-compose-db.yml up",
+    "start:app": "docker compose -f ./docker-compose-app.yml up",
     "serve": "ts-node index.ts"
   },
   "author": "",

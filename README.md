@@ -18,6 +18,7 @@ Few scripts have been pepared in _/node/scripts_ repository which serve the foll
 
 - Deploy code to AWS
 - Starting the application in AWS
+- Run application locally in Docker or separately
 
 ## Bundlers
 
@@ -44,13 +45,3 @@ Logging tool is Winston. There are also integrations with external tracking / lo
 ## Deployment
 
 - Code is prepared to be deployed to AWS EC2 instance with AWS Code Deploy and Pipeline tools. AWS account needs to be setup and credentials updated.
-
-## Local run in Docker or separately
-
-```bash
-docker compose -f docker-compose.redis.yml up
-```
-
-```bash
-    npm run start:local-redis && npm run serve
-```
