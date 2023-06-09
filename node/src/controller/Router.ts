@@ -6,13 +6,13 @@ import logMiddleware from '../middleware/LogMiddleware';
 
 const router = Router();
 
-router.post('/register', logMiddleware, authMiddleware, asyncHandler(userRoute));
-router.get('/login', logMiddleware, authMiddleware, asyncHandler(userRoute));
-router.get('/refreshToken', logMiddleware, authMiddleware, asyncHandler(tokenRoute));
-router.delete('/removeToken', logMiddleware, authMiddleware, asyncHandler(tokenRoute));
-router.get('/getPosts', logMiddleware, authMiddleware, asyncHandler(getActionRoute));
-router.get('/getPost/:postId', logMiddleware, authMiddleware, asyncHandler(getActionRoute));
-router.post('/post', logMiddleware, authMiddleware, asyncHandler(postActionRoute));
-router.get('/error', logMiddleware, errorRoute);
+router.post('/api/register', logMiddleware, authMiddleware, asyncHandler(userRoute));
+router.get('/api/login', logMiddleware, authMiddleware, asyncHandler(userRoute));
+router.get('/api/refreshToken', logMiddleware, authMiddleware, asyncHandler(tokenRoute));
+router.delete('/api/removeToken', logMiddleware, authMiddleware, asyncHandler(tokenRoute));
+router.get('/api/getPosts', logMiddleware, authMiddleware, asyncHandler(getActionRoute));
+router.get('/api/getPost/:postId', logMiddleware, authMiddleware, asyncHandler(getActionRoute));
+router.post('/api/post', logMiddleware, authMiddleware, asyncHandler(postActionRoute));
+router.get('/api/error', logMiddleware, errorRoute);
 
 export default router;
