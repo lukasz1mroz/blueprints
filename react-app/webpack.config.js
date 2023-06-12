@@ -1,9 +1,12 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  target: 'node',
   entry: {
-    main: path.resolve(__dirname, './src/index.tsx'),
+    main: path.resolve(__dirname, "./src/index.tsx"),
+  },
+  output: {
+    path: path.resolve(__dirname, "./dist"),
+    filename: "[name].js",
   },
   module: {
     rules: [
@@ -11,17 +14,20 @@ module.exports = {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-typescript'],
-            plugins: ['@babel/plugin-transform-runtime', '@babel/plugin-transform-typescript'],
+            presets: ["@babel/preset-env", "@babel/preset-typescript"],
+            plugins: [
+              "@babel/plugin-transform-runtime",
+              "@babel/plugin-transform-typescript",
+            ],
           },
         },
       },
       {
         test: /\.tsx?$/,
         use: {
-          loader: 'ts-loader',
+          loader: "ts-loader",
           options: {
             compilerOptions: {
               noEmit: false,
@@ -32,15 +38,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader?url=false'],
+        use: ["style-loader", "css-loader?url=false"],
       },
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-  },
-  output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: '[name].js',
+    extensions: [".tsx", ".ts", ".js"],
   },
 };
