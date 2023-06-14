@@ -7,16 +7,21 @@ import '../styles/Login.css';
 const Login = ({ setToken }: any) => {
   const [username, setUserName] = useState<string>();
   const [password, setPassword] = useState<string>();
+  const [error, setError] = useState<string>();
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    const response = await api.login(username as string, password as string);
-    setToken(response.data.accessToken);
+    try {
+      e.preventDefault();
+      const response = await api.login(username as string, password as string);
+      setToken(response.data.accessToken);
+    } catch (err) {
+      setError(err as any)
+    }
   };
 
   return (
     <div className="loginWrapper">
-      <h2>Please log in</h2>
+      <h2>{error ? 'Incorrect credentials, please try again' : 'Please log in'}</h2>
       <form onSubmit={handleSubmit}>
         <label>
           <p>Username</p>
