@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-import { InternalServerError } from '../types/errors';
+import { BadRequestError, InternalServerError, UnauthorizedError } from '../types/errors';
 import { AuthResponse } from '../types/response';
 import { User } from '../types/users';
 import { config } from '../../config/index';
@@ -21,10 +21,8 @@ export const registerAction = async (name: string, password: string): Promise<Au
 
     if (dbResp.rows.find((u) => u.name === name)) {
       registerActionMessage = 'User already registered';
-      return {
-        status: 400,
-        description: registerActionMessage,
-      };
+
+      throw new BadRequestError({ logSource: LOG_SOURCE, description: registerActionMessage})
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -36,33 +34,28 @@ export const registerAction = async (name: string, password: string): Promise<Au
       description: registerActionMessage,
     };
   } catch (e) {
-    throw new InternalServerError({ logSource: LOG_SOURCE, description: 'Internal Server Error', details: { e } });
+    throw e
   }
 };
 
 export const loginAction = async (name: string, password: string): Promise<AuthResponse> => {
   try {
     let loginActionMessage = 'User authenticated';
-    
-    const dbResp = await dbQuery({text: 'SELECT * FROM users'})
+
+    const dbResp = await dbQuery({text: 'SELECT * FROM users WHERE name = $1', values: [name]})
     
     if (!dbResp.rows.find((u) => u.name === name)) {
       loginActionMessage = 'User not registered';
-      return {
-        status: 401,
-        description: loginActionMessage,
-      };
+      throw new UnauthorizedError({ logSource: LOG_SOURCE, description: loginActionMessage})
     }
 
     const storedUser = dbResp.rows.find((u) => u.name === name) as User;
 
     if (!(await bcrypt.compare(password, storedUser.password))) {
       loginActionMessage = 'Wrong password';
-      return {
-        status: 401,
-        description: loginActionMessage,
-      };
+      throw new UnauthorizedError({ logSource: LOG_SOURCE, description: loginActionMessage})
     }
+
     const accessToken = jwt.sign({storedUser}, accessTokenSecret, { expiresIn: expiresIn });
     const refreshToken = jwt.sign({storedUser}, refreshTokenSecret);
     refreshTokens.push(refreshToken);
@@ -76,7 +69,7 @@ export const loginAction = async (name: string, password: string): Promise<AuthR
       expiresIn: expiresIn 
     };
   } catch (e) {
-    throw new InternalServerError({ logSource: LOG_SOURCE, description: 'Internal Server Error', details: e });
+    throw e
   }
 };
 
