@@ -6,7 +6,8 @@ WHERE NOT EXISTS (
     ) \ gexec \ c blueprints CREATE TABLE IF NOT EXISTS users (
         id serial PRIMARY KEY,
         name varchar,
-        password varchar
+        password varchar,
+        CONSTRAINT name UNIQUE(name)
     );
 INSERT INTO users(name, password)
 SELECT 'test',
