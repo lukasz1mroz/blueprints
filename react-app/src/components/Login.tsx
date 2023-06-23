@@ -4,7 +4,7 @@ import api from '../handlers/ApiCalls';
 
 import '../styles/Login.css';
 
-const Login = ({ setToken }: any) => {
+const Login = ({setToken}: any) => {
   const [username, setUserName] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [error, setError] = useState<string>();
@@ -21,7 +21,7 @@ const Login = ({ setToken }: any) => {
 
   return (
     <div className="loginWrapper">
-      <h2>{error ? 'Incorrect credentials, please try again' : 'Please log in'}</h2>
+      {error && <h3>Incorrect credentials, please try again</h3>}
       <form onSubmit={handleSubmit}>
         <label>
           <p>Username</p>

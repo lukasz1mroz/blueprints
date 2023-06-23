@@ -6,12 +6,12 @@ export default function useToken() {
     return tokenString;
   };
 
-  const [token, setToken] = useState(getToken());
-
   const saveToken = (token: string) => {
     sessionStorage.setItem('token', token);
     setToken(token);
   };
+
+  const [token, setToken] = useState(getToken());
 
   return {
     setToken: saveToken,
