@@ -16,7 +16,7 @@ module.exports = {
   auth: {
     accessTokenSecret: '$ACCESS_TOKEN_SECRET',
     refreshTokenSecret: '$REFRESH_TOKEN_SECRET',
-    expiresIn: '30s',
+    expiresIn: '30m',
   },
   influx: {
     dbUrl: '$INFLUX_DB_URL',
