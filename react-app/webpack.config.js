@@ -1,4 +1,5 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -8,6 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, "./dist"),
     filename: "[name].js",
   },
+  plugins: [new HtmlWebpackPlugin({ template: "./public/index.html" })],
   module: {
     rules: [
       {
@@ -47,7 +49,7 @@ module.exports = {
   },
   devServer: {
     static: {
-      directory: path.join(__dirname, "public"),
+      directory: path.join(__dirname, "dist"),
     },
     proxy: {
       "/api": "http://localhost:3000",
