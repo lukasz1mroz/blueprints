@@ -1,28 +1,14 @@
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import MainContent from './components/MainContent';
-import useToken from './hooks/useToken';
-import Login from './components/Login';
+import * as ReactDOM from "react-dom/client";
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import MainContent from './components/MainContent'
 import './styles/index.css';
 
-const Main = () => {
-  const { token, setToken } = useToken();
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainContent />,
+  },
+])
 
-  if (!token) {
-    return <Login setToken={setToken} />;
-  }
+ReactDOM.createRoot(document.getElementById("root")!).render(<RouterProvider router={router}/>)
 
-  return (
-    <div className="wrapper">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainContent />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
-};
-
-ReactDOM.render(<Main />, document.getElementById('root'));
-
-export default Main;
