@@ -1,46 +1,41 @@
-import PropTypes from 'prop-types';
-import { useState } from 'react';
-import api from '../handlers/ApiCalls';
+import * as React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "./Auth";
 
-import '../styles/Login.css';
+export function Login() {
+  let navigate = useNavigate();
+  let location = useLocation();
+  let auth = useAuth();
 
-const Login = ({setToken}: any) => {
-  const [username, setUserName] = useState<string>();
-  const [password, setPassword] = useState<string>();
-  const [error, setError] = useState<string>();
+  let from = location.state?.from?.pathname || "/";
 
-  const handleSubmit = async (e: any) => {
-    try {
-      e.preventDefault();
-      const response = await api.login(username as string, password as string);
-      setToken(response.data.accessToken);
-    } catch (err) {
-      setError(err as any)
-    }
-  };
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    let formData = new FormData(event.currentTarget);
+    let username = formData.get("username") as string;
+    let password = formData.get("password") as string;
+
+    auth.signin({ username: username, password: password }, () => {
+      navigate(from, { replace: true });
+    });
+  }
 
   return (
-    <div className="loginWrapper">
-      {error && <h3>Incorrect credentials, please try again</h3>}
+    <div>
+      <p>You must log in to view the page at {from}</p>
+
       <form onSubmit={handleSubmit}>
         <label>
-          <p>Username</p>
-          <input type="text" onChange={(e) => setUserName(e.target.value)} />
-        </label>
+          Username: <input name="username" type="text" />
+        </label>{" "}
         <label>
-          <p>Password</p>
-          <input type="password" onChange={(e) => setPassword(e.target.value)} />
-        </label>
-        <div className="buttonWrapper">
-          <button type="submit">Submit</button>
-        </div>
+          Password: <input name="password" type="text" />
+        </label>{" "}
+        <button type="submit">Login</button>
       </form>
     </div>
   );
-};
-
-Login.propTypes = {
-  setToken: PropTypes.func.isRequired,
-};
+}
 
 export default Login;
