@@ -22,7 +22,7 @@
   "include": [
     "src/*",
     "src/handlers/ApiHandler.tsx",
-    "src/components/MainContent.tsx",
+    "src/components/Main.tsx",
     "src/components/Login.tsx",
     "src/handlers/ApiCalls.tsx"
   ]
