@@ -6,13 +6,13 @@ import "../styles/Post.css";
 
 const Post = () => {
   let auth = useAuth();
-  const [post, setPost] = useState<any>();
+  const [posts, setPosts] = useState<any>();
   const [, setError] = useState<any>();
 
   const postsCall = async () => {
     try {
       const apiResponse = await api.getPosts(auth.token);
-      setPost(apiResponse.data.data[0]);
+      setPosts(apiResponse.data.data);
     } catch (e) {
       setError(e);
     }
@@ -24,8 +24,13 @@ const Post = () => {
 
   return (
     <div className="postWrapper">
-      <h3>{post && (post.title as string)}</h3>
-      <p>{post && (post.body as string)}</p>
+      {posts &&
+        posts.map((post: { title: string; body: string }, idx: any) => (
+          <div key={idx}>
+            <h3>{post.title}</h3>
+            <p>{post.body}</p>
+          </div>
+        ))}
     </div>
   );
 };
