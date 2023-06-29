@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useNavigate, useLocation, Navigate } from "react-router-dom";
+import { Link, useNavigate, useLocation, Navigate } from "react-router-dom";
 import api from "../handlers/ApiCalls";
 
 interface AuthContextType {
@@ -50,7 +50,14 @@ export function AuthStatus() {
   let navigate = useNavigate();
 
   if (!auth.token) {
-    return <p>You are not logged in.</p>;
+    return (
+      <div className="panel">
+        <p className="panel-el">You are not logged in.</p>
+        <Link className="panel-el" to="/login">
+          Login
+        </Link>
+      </div>
+    );
   }
 
   return (

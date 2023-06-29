@@ -6,17 +6,22 @@ function Layout() {
   return (
     <div>
       <div className="header">
-        <AuthStatus />
-        <ul>
-          <li>
-            <Link to="/">Main content</Link>
-          </li>
-          <li>
-            <Link to="/posts">Posts</Link>
-          </li>
-        </ul>
+        <h1>Blueprints project</h1>
+        <div className="panel">
+          <AuthStatus />
+          <ul className="panel">
+            <li>
+              <Link to="/">Main content</Link>
+            </li>
+            <li>
+              <Link to="/posts">Posts</Link>
+            </li>
+          </ul>
+        </div>
       </div>
-      <Outlet />
+      <div className="body">
+        <Outlet />
+      </div>
     </div>
   );
 }
