@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
     "test": "jest",
     "build:tsCheck": "tsc --build tsconfig.json",
@@ -11,13 +11,14 @@
     "build:scripts": "cp -r ./scripts ./dist",
     "build:appspec": "cp ./appspec.yml ./dist",
     "build:files": "babel ./ --extensions .ts,.js -d dist --ignore **/__mocks__,**/node_modules,**/*.test.js",
-    "build": "rm -rf ./dist && npm run build:tsCheck && npm run build:files && npm run build:package && npm run build:scripts && npm run build:appspec",
+    "build": "rm -rf ./dist && npm run build:tsCheck && npm run build:files && npm run build:package && npm run build:scripts && cd ./dist && zip ../app.zip -r .",
     "start:nodemon": "nodemon",
     "start:debug": "node --inspect -r ts-node/register -r tsconfig-paths/register index.ts",
     "start:redis": "docker compose -f ./docker-compose-redis.yml up",
     "start:postgres": "docker compose -f ./docker-compose-db.yml up",
     "start:app": "docker compose -f ./docker-compose-app.yml up",
-    "serve": "ts-node index.ts"
+    "serve": "ts-node index.ts",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
