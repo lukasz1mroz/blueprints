@@ -122,3 +122,5 @@ dist
 
 # Project specific requirement
 package-lock.json
+
+app.zip
