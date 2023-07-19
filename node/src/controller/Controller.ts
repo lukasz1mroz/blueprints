@@ -52,3 +52,7 @@ export const postActionRoute = async (req: RequestWithUser, res: Response): Prom
 export const errorRoute = (req: Request, res: Response, next: NextFunction): Error => {
   throw new InternalServerError({ logSource: LOG_SOURCE, description: 'Error from errorRoute in Controller' });
 };
+
+export const pingRoute = (req: Request, res: Response, next: NextFunction): Response => {
+  return res.header('Access-Control-Allow-Origin', '*').status(200).json({text: "pong"})
+};

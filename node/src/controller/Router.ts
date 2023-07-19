@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import { Router } from 'express';
-import { userRoute, tokenRoute, errorRoute, getActionRoute, postActionRoute } from './Controller';
+import { userRoute, tokenRoute, errorRoute, getActionRoute, postActionRoute, pingRoute } from './Controller';
 import authMiddleware from '../middleware/AuthMiddleware';
 import logMiddleware from '../middleware/LogMiddleware';
 
@@ -14,5 +14,6 @@ router.get('/api/getPosts', logMiddleware, authMiddleware, asyncHandler(getActio
 router.get('/api/getPost/:postId', logMiddleware, authMiddleware, asyncHandler(getActionRoute));
 router.post('/api/post', logMiddleware, authMiddleware, asyncHandler(postActionRoute));
 router.get('/api/error', logMiddleware, errorRoute);
+router.get('/api/ping', pingRoute);
 
 export default router;
