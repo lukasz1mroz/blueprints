@@ -35,7 +35,7 @@ module.exports = {
   },
   db: {
     user: '$DB_USER',
-    host: 'localhost',
+    host: '$DB_HOST',
     database: 'blueprints',
     password: '$DB_PASSWORD',
     port: 5432,
