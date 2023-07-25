@@ -7,14 +7,14 @@ import { logger } from '../utils/logger';
 import { config } from '../../config/index';
 import { RequestWithUser } from 'src/types/request';
 
-const LOG_SOURCE = 'tokenValidator';
+const LOG_SOURCE = 'AuthMiddleware';
 const accessTokenSecret = config.auth.accessTokenSecret as string;
 const refreshTokenSecret = config.auth.refreshTokenSecret as string;
 
 export default (req: RequestWithUser, res: Response, next: NextFunction) => {
   const authString = req.headers[HEADER_AUTHORIZATION]?.split(' ')[1] as string;
 
-  if (authString === 'null') throw new UnauthorizedError({ logSource: LOG_SOURCE, description: 'Missing token' });
+  if (authString === undefined) throw new UnauthorizedError({ logSource: LOG_SOURCE, description: 'Missing credentials' });
 
   if (req.url === '/api/login' || req.url === '/api/register') {
     const credentials = Buffer.from(authString, 'base64').toString().split(':');
