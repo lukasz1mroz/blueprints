@@ -4,12 +4,14 @@
   "private": true,
   "proxy": "http://localhost:3000",
   "scripts": {
-    "start": "PORT=4000 react-scripts start",
+    "start": "PORT=4000 DEPLOY_ENV=local react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "webpack-build": "webpack --mode=production --config webpack.config.js",
-    "webpack-start": "webpack-dev-server --mode=development --config webpack.config.js"
+    "webpack-start": "webpack-dev-server --mode=development --config webpack.config.js",
+    "deploy": "aws s3 sync build/ s3://blueprints-react",
+    "prod": "npm run build && npm run deploy"
   },
   "dependencies": {
     "axios": "^0.24.0",
