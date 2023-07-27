@@ -20,13 +20,16 @@ const Post = () => {
   };
 
   const filterPosts = (e: any) => {
-    //e.preventDefault();
     const filteredPosts = posts.filter((post: { title: string }) =>
       post.title.includes(e.key)
     );
-    console.log("filteredPosts: ", filteredPosts);
     setFilteredPosts(filteredPosts);
   };
+
+  const currPosts =
+    !filteredPosts || (filteredPosts as Array<any>).length === 0
+      ? posts
+      : filteredPosts;
 
   useEffect(() => {
     postsCall();
@@ -43,7 +46,7 @@ const Post = () => {
         onKeyDown={(e) => filterPosts(e)}
       />
       {posts &&
-        filteredPosts.map((post: { title: string; body: string }, idx: any) => (
+        currPosts.map((post: { title: string; body: string }, idx: any) => (
           <div key={idx}>
             <h3>{post.title}</h3>
             <p>{post.body}</p>
