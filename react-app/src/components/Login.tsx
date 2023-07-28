@@ -8,6 +8,8 @@ export function Login() {
   let auth = useAuth();
 
   let from = location.state?.from?.pathname || "/";
+  const header =
+    location.state?.header || `You must log in to view the page at ${from}`;
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -23,7 +25,7 @@ export function Login() {
 
   return (
     <div>
-      <p>You must log in to view the page at {from}</p>
+      <p>{header}</p>
 
       <form onSubmit={handleSubmit}>
         <label>
