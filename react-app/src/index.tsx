@@ -5,6 +5,7 @@ import MainContent from "./components/Main";
 import Post from "./components/Post";
 import { AuthProvider, RequireAuth } from "./components/Auth";
 import Login from "./components/Login";
+import Register from "./components/Register";
 import "./styles/index.css";
 
 const router = createBrowserRouter([
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
       {
         path: "/posts",
