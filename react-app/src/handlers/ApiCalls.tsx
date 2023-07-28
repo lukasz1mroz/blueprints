@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const backendUrl =
-  process.env.DEPLOY_ENV === "local"
+  process.env.REACT_APP_ENV === "local"
     ? ""
     : "http://bprints.us-east-1.elasticbeanstalk.com";
 
