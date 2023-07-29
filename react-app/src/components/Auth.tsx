@@ -18,16 +18,21 @@ let AuthContext = React.createContext<AuthContextType>(null!);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   let [token, setToken] = React.useState<any>(null);
+  let [, setError] = React.useState<any>(null);
   let [username, setUsername] = React.useState<any>(null);
 
   let signin = async (newUser: User, callback: VoidFunction) => {
-    const response = await api.login(
-      newUser.username as string,
-      newUser.password as string
-    );
-    setToken(response.data.accessToken);
-    setUsername(newUser.username);
-    return callback();
+    try {
+      const response = await api.login(
+        newUser.username as string,
+        newUser.password as string
+      );
+      setToken(response.data.accessToken);
+      setUsername(newUser.username);
+      return callback();
+    } catch (e) {
+      setError(e);
+    }
   };
 
   let signout = async (callback: VoidFunction) => {
