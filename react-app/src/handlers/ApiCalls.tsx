@@ -10,6 +10,14 @@ const api = {
     axios.get(`${backendUrl}/api/login`, {
       auth: { username: username, password: password },
     }),
+  register: (username: string, password: string) =>
+    axios.post(
+      `${backendUrl}/api/register`,
+      {},
+      {
+        auth: { username: username, password: password },
+      }
+    ),
   getPosts: (authToken: string) =>
     axios.get(`${backendUrl}/api/getPosts`, {
       headers: { Authorization: `Bearer ${authToken}` },

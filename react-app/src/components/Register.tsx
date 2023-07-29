@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../handlers/ApiCalls";
 
 export function Register() {
   let navigate = useNavigate();
@@ -7,7 +8,7 @@ export function Register() {
     "Please provide your credentials to register"
   );
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     let formData = new FormData(event.currentTarget);
@@ -16,7 +17,8 @@ export function Register() {
     let passwordRepeat = formData.get("passwordRepeat") as string;
 
     if (password === passwordRepeat && username) {
-      console.log("register-success");
+      await api.register(username as string, password as string);
+
       navigate("/login", {
         state: { header: "Registered successfully, you can now log in." },
       });
