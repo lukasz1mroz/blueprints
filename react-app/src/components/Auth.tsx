@@ -61,6 +61,9 @@ export function AuthStatus() {
         <Link className="panel-el" to="/login">
           Login
         </Link>
+        <Link className="panel-el" to="/register">
+          Register
+        </Link>
       </div>
     );
   }
