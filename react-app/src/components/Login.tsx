@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "./Auth";
 
 export function Login() {
+  const [errHeader, setErrHeader] = React.useState<any>();
   let navigate = useNavigate();
   let location = useLocation();
   let auth = useAuth();
@@ -11,21 +12,27 @@ export function Login() {
   const header =
     location.state?.header || `You must log in to view the page at ${from}`;
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     let formData = new FormData(event.currentTarget);
     let username = formData.get("username") as string;
     let password = formData.get("password") as string;
 
-    auth.signin({ username: username, password: password }, () => {
-      navigate(from, { replace: true });
-    });
+    const resp = await auth.signin(
+      { username: username, password: password },
+      () => {
+        navigate(from, { replace: true });
+      }
+    );
+    if (resp === undefined) {
+      setErrHeader("Login error, please try again.");
+    }
   }
 
   return (
     <div>
-      <p>{header}</p>
+      <p>{errHeader || header}</p>
 
       <form onSubmit={handleSubmit}>
         <label>
