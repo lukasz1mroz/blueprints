@@ -3,7 +3,7 @@ import axios from "axios";
 const backendUrl =
   process.env.REACT_APP_ENV === "local"
     ? ""
-    : "http://bprints.us-east-1.elasticbeanstalk.com";
+    : "https://bprints.us-east-1.elasticbeanstalk.com";
 
 const api = {
   login: (username: string, password: string) =>
