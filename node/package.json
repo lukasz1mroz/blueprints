@@ -18,7 +18,7 @@
     "start:redis": "docker compose -f ./docker-compose-redis.yml up",
     "start:postgres": "docker compose -f ./docker-compose-db.yml up",
     "start:app": "docker compose -f ./docker-compose-app.yml up",
-    "start": "ts-node index.ts"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
